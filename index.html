@@ -179,8 +179,8 @@ input[type=range]{flex:1;accent-color:var(--ac);cursor:pointer;}
 
 <div id="hdr">
   <h1>🏢 AI 하이퍼스케일 데이터센터 최적입지</h1>
-  <span class="chip">BFS+용도지역보정 v5</span>
   <span class="chip">250m 격자 | Top 15</span>
+  <span class="chip" style="color:var(--txt);">AI 도메인 — 이지민 · 이승화 · 문광윤 · 한혜인 · 김진우 · 이윤서</span>
 </div>
 
 <div id="tabbar">
@@ -242,7 +242,7 @@ input[type=range]{flex:1;accent-color:var(--ac);cursor:pointer;}
         <p class="sech">입지 정보</p>
         <div class="igrid">
           <div class="icard"><div class="icard-l">격자 / 건폐면적</div><div class="icard-v" id="dp-ha"></div></div>
-          <div class="icard"><div class="icard-l">클러스터링 방법</div><div class="icard-v" id="dp-mth" style="font-size:11px"></div></div>
+          <div class="icard"><div class="icard-l">분석 버전</div><div class="icard-v" id="dp-mth" style="font-size:11px">v5</div></div>
           <div class="icard"><div class="icard-l">변전소 거리 (실측)</div><div class="icard-v" id="dp-sub-d"></div></div>
           <div class="icard"><div class="icard-l">수계 거리 (실측)</div><div class="icard-v" id="dp-wat-d"></div></div>
         </div>
@@ -413,7 +413,7 @@ REGIONS.forEach(r=>{
   d.innerHTML=`<div class="rb ${rc}">${r.rank}</div>
     <div class="ri-info">
       <div class="ri-name">${r.sido} ${r.sigungu}</div>
-      <div class="ri-meta">${r.n_grids}격자/${r.buildable_ha.toLocaleString()}ha · ${r.method}</div>
+      <div class="ri-meta">${r.n_grids}격자 / ${r.buildable_ha.toLocaleString()}ha</div>
     </div>
     <div class="ri-score">${r.final_score}</div>`;
   d.onclick=()=>selectRegion(r);
@@ -490,13 +490,13 @@ function selectRegion(r){
   }
   // 상세 패널
   const dp=document.getElementById('dp'); dp.style.display='block';
-  document.getElementById('dp-rank').textContent=`${r.rank}위 · ${r.method}`;
+  document.getElementById('dp-rank').textContent=`${r.rank}위`;
   document.getElementById('dp-title').textContent=`${r.sido} ${r.sigungu}`;
   document.getElementById('dp-fs').textContent=r.final_score;
   document.getElementById('dp-ms').textContent=r.macro_norm.toFixed(1);
   document.getElementById('dp-cs').textContent=r.top_cluster_score.toFixed(1);
   document.getElementById('dp-ha').textContent=`${r.n_grids}격자/${r.buildable_ha.toLocaleString()}ha`;
-  document.getElementById('dp-mth').textContent=r.method;
+  document.getElementById('dp-mth').textContent='v5';
   document.getElementById('dp-sub-d').textContent=`${r.sub_dist_km}km`;
   document.getElementById('dp-wat-d').textContent=`${r.water_dist_km}km (${r.water_grade})`;
 
