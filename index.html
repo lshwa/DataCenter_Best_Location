@@ -300,12 +300,9 @@ input[type=range]{flex:1;accent-color:var(--ac);cursor:pointer;}
     <div id="sc-infra-list" style="font-size:11px;color:var(--txt2);"></div>
 
     <!-- 버튼 -->
-    <button onclick="runMapSim()"
+    <button id="sim-run-btn" onclick="toggleMapSim()"
       style="background:var(--ac);border:none;color:#fff;padding:10px;border-radius:8px;
              font-size:13px;font-weight:700;cursor:pointer;width:100%;">▶ 시뮬레이션 실행</button>
-    <button onclick="resetMapSim()"
-      style="background:var(--bg3);border:1px solid var(--bd);color:var(--txt2);
-             padding:7px;border-radius:8px;font-size:11px;cursor:pointer;width:100%;">↺ 초기화</button>
 
     <!-- 결과 타임라인 -->
     <div id="sc-result" class="tl2" style="flex:1;overflow-y:auto;"></div>
@@ -696,6 +693,9 @@ function onSimRegionChange(){
 
 /* 초기화 */
 function resetMapSim(){
+  simRunning=false;
+  const btn=document.getElementById('sim-run-btn');
+  if(btn){btn.textContent='▶ 시뮬레이션 실행';btn.style.background='var(--ac)';}
   simAnimators.forEach(a=>{if(a&&a.remove)a.remove();});
   simAnimators=[];
   if(simMap){
@@ -726,6 +726,23 @@ function addTL(html,delay){
 /* ══════════════════════════════════════════════════════════
    메인 시뮬레이션 실행
 ═══════════════════════════════════════════════════════════ */
+let simRunning=false;
+function toggleMapSim(){
+  const btn=document.getElementById('sim-run-btn');
+  if(simRunning){
+    resetMapSim();
+    simRunning=false;
+    if(btn){btn.textContent='▶ 시뮬레이션 실행';btn.style.background='var(--ac)';}
+  } else {
+    simRunning=true;
+    if(btn){btn.textContent='⏹ 시뮬레이션 중지';btn.style.background='#c0392b';}
+    runMapSim();
+  }
+}
+function goSim(){
+  document.querySelectorAll('.tbtab')[1]?.click();
+  setTimeout(()=>{initSimMap();toggleMapSim();},300);
+}
 function runMapSim(){
   initSimMap();
   resetMapSim();
