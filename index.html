@@ -158,6 +158,21 @@ input[type=range]{flex:1;accent-color:var(--ac);cursor:pointer;}
 /* 탭 콘텐츠 (지도/분석) */
 .tab-view{display:none;flex:1;overflow:hidden;}
 .tab-view.on{display:flex;}
+
+/* ── 시뮬레이션 지도 탭 ── */
+.sc-btn{flex:1;padding:7px 4px;border-radius:6px;border:1px solid var(--bd);
+  background:var(--bg3);color:var(--txt2);font-size:11px;cursor:pointer;font-weight:600;transition:all .2s;}
+.sc-active{background:var(--ac)!important;color:#fff!important;border-color:var(--ac)!important;}
+.sub-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.sub-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.tl2{margin-top:6px;}
+.tl2-item{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);
+  opacity:0;animation:fadeIn .35s ease forwards;}
+@keyframes drawPath{0%{stroke-dashoffset:var(--pathlen,2000)}100%{stroke-dashoffset:0}}
+@keyframes flowElec{0%{stroke-dashoffset:30}100%{stroke-dashoffset:0}}
+@keyframes flowWater{0%{stroke-dashoffset:20}100%{stroke-dashoffset:0}}
+@keyframes pulseGlow{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.6}}
+.sim-pulse{animation:pulseGlow 1.2s ease-in-out infinite;}
 </style>
 </head>
 <body>
@@ -250,99 +265,54 @@ input[type=range]{flex:1;accent-color:var(--ac);cursor:pointer;}
 </div>
 
 <!-- ═══ 시뮬레이션 탭 ════════════════════════════════════════════════════════ -->
-<div id="view-sim-full" class="tab-view" style="flex-direction:column;overflow-y:auto;background:var(--bg);">
-  <div style="max-width:1100px;margin:0 auto;padding:24px 20px;width:100%;">
+<div id="view-sim-full" class="tab-view" style="flex-direction:row;overflow:hidden;">
+
+  <!-- 왼쪽 컨트롤 패널 -->
+  <div style="width:280px;min-width:280px;overflow-y:auto;background:var(--bg2);
+    border-right:1px solid var(--bd);padding:14px;display:flex;flex-direction:column;gap:10px;">
+
+    <div style="font-size:13px;font-weight:700;color:var(--txt);">운영 시뮬레이션</div>
+    <div style="font-size:11px;color:var(--txt2);line-height:1.6;">
+      지도에서 데이터센터 입지의 실제 인프라 연결을 시각화합니다</div>
 
     <!-- 지역 선택 -->
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
-      <span style="font-size:13px;color:var(--txt2);">분석 지역</span>
+    <div>
+      <div style="font-size:11px;color:var(--txt2);margin-bottom:5px;">분석 지역</div>
       <select id="sim-region-sel" onchange="onSimRegionChange()"
-        style="background:var(--bg3);border:1px solid var(--bd);color:var(--txt);
-               padding:6px 12px;border-radius:7px;font-size:13px;cursor:pointer;">
-      </select>
-      <span style="font-size:12px;color:var(--txt2);" id="sim-region-info"></span>
+        style="width:100%;background:var(--bg3);border:1px solid var(--bd);color:var(--txt);
+               padding:7px 10px;border-radius:7px;font-size:12px;cursor:pointer;"></select>
     </div>
 
-    <!-- 3개 시뮬레이션 카드 -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px;">
-
-      <!-- 전력 공급 시뮬레이션 -->
-      <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:12px;overflow:hidden;">
-        <div style="padding:14px 16px;border-bottom:1px solid var(--bd);
-             background:rgba(88,166,255,.05);">
-          <div style="font-size:13px;font-weight:700;color:var(--ac);">⚡ 전력 공급 시뮬레이션</div>
-          <div style="font-size:11px;color:var(--txt2);margin-top:2px;">실제 OSM 154kV+ 변전소 데이터 연동</div>
-        </div>
-        <div style="padding:14px 16px;">
-          <div class="srow">
-            <span class="slbl">수요 급증</span>
-            <input type="range" id="sl-power" min="50" max="500" step="50" value="100"
-              oninput="updatePowerSim()">
-            <span class="sval" id="sl-power-val">100 MW</span>
-          </div>
-          <div id="power-subs" style="margin-bottom:10px;"></div>
-          <div id="power-gauge" class="gauge-wrap"></div>
-          <div id="power-result"></div>
-          <button class="run-btn" onclick="runPowerTimeline()">시뮬레이션 실행</button>
-          <div id="power-timeline"></div>
-        </div>
-      </div>
-
-      <!-- 냉각수 공급 시뮬레이션 -->
-      <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:12px;overflow:hidden;">
-        <div style="padding:14px 16px;border-bottom:1px solid var(--bd);
-             background:rgba(57,211,83,.05);">
-          <div style="font-size:13px;font-weight:700;color:var(--cy);">💧 냉각수 공급 시뮬레이션</div>
-          <div style="font-size:11px;color:var(--txt2);margin-top:2px;">실제 OSM 수계 데이터 연동</div>
-        </div>
-        <div style="padding:14px 16px;">
-          <div class="srow">
-            <span class="slbl">데이터센터 규모</span>
-            <input type="range" id="sl-mw" min="50" max="500" step="50" value="100"
-              oninput="updateWaterSim()">
-            <span class="sval" id="sl-mw-val">100 MW</span>
-          </div>
-          <div id="water-need" style="margin-bottom:10px;"></div>
-          <div id="water-gauge" class="gauge-wrap"></div>
-          <div id="water-result"></div>
-          <button class="run-btn" onclick="runWaterTimeline()">시뮬레이션 실행</button>
-          <div id="water-timeline"></div>
-        </div>
-      </div>
-
-      <!-- 교통/물류 시뮬레이션 -->
-      <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:12px;overflow:hidden;">
-        <div style="padding:14px 16px;border-bottom:1px solid var(--bd);
-             background:rgba(188,140,255,.05);">
-          <div style="font-size:13px;font-weight:700;color:var(--pu);">🚛 교통·물류 시뮬레이션</div>
-          <div style="font-size:11px;color:var(--txt2);margin-top:2px;">실제 OSM 도로망 데이터 연동</div>
-        </div>
-        <div style="padding:14px 16px;">
-          <div class="srow">
-            <span class="slbl">장비 반입</span>
-            <input type="range" id="sl-truck" min="1" max="20" step="1" value="5"
-              oninput="updateTrafficSim()">
-            <span class="sval" id="sl-truck-val">5 대/일</span>
-          </div>
-          <div id="traffic-info" style="margin-bottom:10px;"></div>
-          <div id="traffic-gauge" class="gauge-wrap"></div>
-          <div id="traffic-result"></div>
-          <button class="run-btn" onclick="runTrafficTimeline()">시뮬레이션 실행</button>
-          <div id="traffic-timeline"></div>
-        </div>
+    <!-- 시나리오 탭 -->
+    <div>
+      <div style="font-size:11px;color:var(--txt2);margin-bottom:5px;">시나리오</div>
+      <div style="display:flex;gap:5px;">
+        <button class="sc-btn sc-active" id="sc-btn-power" onclick="setScenario('power')">⚡ 전력</button>
+        <button class="sc-btn" id="sc-btn-water" onclick="setScenario('water')">💧 냉각수</button>
+        <button class="sc-btn" id="sc-btn-traffic" onclick="setScenario('traffic')">🚛 교통</button>
       </div>
     </div>
 
-    <!-- 종합 운영 가능성 -->
-    <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:18px 20px;">
-      <div style="font-size:14px;font-weight:700;margin-bottom:14px;">📊 종합 운영 가능성 평가</div>
-      <div style="display:grid;grid-template-columns:1fr 3fr;gap:20px;align-items:center;">
-        <canvas id="overall-chart" height="160"></canvas>
-        <div id="overall-table"></div>
-      </div>
-    </div>
+    <!-- 슬라이더 (시나리오별 교체) -->
+    <div id="sc-slider-wrap"></div>
 
+    <!-- 변전소/수원/도로 목록 -->
+    <div id="sc-infra-list" style="font-size:11px;color:var(--txt2);"></div>
+
+    <!-- 버튼 -->
+    <button onclick="runMapSim()"
+      style="background:var(--ac);border:none;color:#fff;padding:10px;border-radius:8px;
+             font-size:13px;font-weight:700;cursor:pointer;width:100%;">▶ 시뮬레이션 실행</button>
+    <button onclick="resetMapSim()"
+      style="background:var(--bg3);border:1px solid var(--bd);color:var(--txt2);
+             padding:7px;border-radius:8px;font-size:11px;cursor:pointer;width:100%;">↺ 초기화</button>
+
+    <!-- 결과 타임라인 -->
+    <div id="sc-result" class="tl2" style="flex:1;overflow-y:auto;"></div>
   </div>
+
+  <!-- 오른쪽: 풀스크린 지도 -->
+  <div id="sim-map" style="flex:1;position:relative;"></div>
 </div>
 
 <!-- ═══ 방법론 탭 ═══════════════════════════════════════════════════════════ -->
@@ -530,215 +500,399 @@ REGIONS.forEach(r=>{
   sel.appendChild(opt);
 });
 
-let simRegion=REGIONS[0];
+// ─── 시뮬레이션 지도 ──────────────────────────────────────────────────────────
+let simMap=null, simAnimators=[], simRegion=REGIONS[0], simScenario='power';
+const SEOUL=[37.5665,126.9780];
 
-function onSimRegionChange(){
-  simRegion=REGIONS.find(r=>r.rank===parseInt(sel.value))||REGIONS[0];
-  document.getElementById('sim-region-info').textContent=
-    `변전소 ${simRegion.substations.length}개 · 총 추정 가용 ${simRegion.total_avail_mw}MW · 수계 ${simRegion.water_dist_km}km · 도로 ${simRegion.road_dist_km}km`;
-  updatePowerSim(); updateWaterSim(); updateTrafficSim();
-  updateOverall();
-  // 타임라인 초기화
-  ['power','water','traffic'].forEach(t=>document.getElementById(t+'-timeline').innerHTML='');
+/* 곡선 호 생성 (베지어) */
+function curvedArc(from,to,n,curve){
+  n=n||60; curve=curve||0.25;
+  const mid=[(from[0]+to[0])/2,(from[1]+to[1])/2];
+  const dx=to[1]-from[1], dy=to[0]-from[0];
+  const ctrl=[mid[0]-curve*dx, mid[1]+curve*dy];
+  const pts=[];
+  for(let i=0;i<=n;i++){
+    const t=i/n;
+    pts.push([
+      (1-t)*(1-t)*from[0]+2*(1-t)*t*ctrl[0]+t*t*to[0],
+      (1-t)*(1-t)*from[1]+2*(1-t)*t*ctrl[1]+t*t*to[1]
+    ]);
+  }
+  return pts;
 }
 
-// ═══ 전력 시뮬레이션 ═════════════════════════════════════════════════════════
-function updatePowerSim(){
-  const demand=parseInt(document.getElementById('sl-power').value);
-  document.getElementById('sl-power-val').textContent=demand+' MW';
-  const r=simRegion;
+/* 방위각 기반 좌표 오프셋 */
+function offsetPos(lat,lon,km,deg){
+  const R=6371, b=deg*Math.PI/180;
+  const d=km/R, la=lat*Math.PI/180, lo=lon*Math.PI/180;
+  const la2=Math.asin(Math.sin(la)*Math.cos(d)+Math.cos(la)*Math.sin(d)*Math.cos(b));
+  const lo2=lo+Math.atan2(Math.sin(b)*Math.sin(d)*Math.cos(la),Math.cos(d)-Math.sin(la)*Math.sin(la2));
+  return [la2*180/Math.PI, lo2*180/Math.PI];
+}
 
-  // 변전소 목록
-  let subsHtml='<div style="font-size:11px;color:var(--txt2);margin-bottom:6px;">인근 154kV+ 변전소 (실데이터)</div>';
-  let cumCap=0;
-  r.substations.forEach((s,i)=>{
-    cumCap+=s.est_cap_mw;
-    const pct=Math.min(100,s.est_cap_mw/300*100);
-    const c=i===0?'var(--gr)':'var(--ac)';
-    subsHtml+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
-      <div style="width:6px;height:6px;border-radius:50%;background:${c};flex-shrink:0;"></div>
-      <div style="flex:1;min-width:0;font-size:11px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${s.name}</div>
-      <div style="font-size:10px;color:var(--txt2);white-space:nowrap">${s.dist_km}km</div>
-      <div style="font-size:11px;font-weight:600;color:${c};white-space:nowrap">~${s.est_cap_mw}MW</div>
-    </div>`;
+/* 경로 위 t(0~1) 위치 계산 */
+function posOnPath(pts, t){
+  let total=0;
+  const segs=[];
+  for(let i=1;i<pts.length;i++){
+    const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);
+    segs.push(d); total+=d;
+  }
+  const target=t*total;
+  let cum=0;
+  for(let i=0;i<segs.length;i++){
+    if(cum+segs[i]>=target){
+      const f=(target-cum)/segs[i];
+      return [pts[i][0]+(pts[i+1][0]-pts[i][0])*f,
+              pts[i][1]+(pts[i+1][1]-pts[i][1])*f];
+    }
+    cum+=segs[i];
+  }
+  return pts[pts.length-1];
+}
+
+/* 파티클 애니메이터 */
+class PathAnimator{
+  constructor(map,pts,color,n,speed,size){
+    this.map=map; this.pts=pts; this.running=false;
+    this.speed=speed||0.004; this.n=n||5;
+    // 기본 선 (반투명 점선)
+    this.line=L.polyline(pts,{color,weight:2,opacity:0.35,dashArray:'6 4'}).addTo(map);
+    // 파티클 마커들
+    this.particles=[];
+    for(let i=0;i<n;i++){
+      const t0=(i/n);
+      const icon=L.divIcon({
+        html:`<div style="width:${size||8}px;height:${size||8}px;border-radius:50%;
+          background:${color};box-shadow:0 0 8px 3px ${color};"></div>`,
+        className:'',iconSize:[size||8,size||8],iconAnchor:[(size||8)/2,(size||8)/2]
+      });
+      const m=L.marker(posOnPath(pts,t0),{icon,zIndexOffset:1000}).addTo(map);
+      this.particles.push({m,t:t0});
+    }
+  }
+  start(){
+    this.running=true;
+    const tick=()=>{
+      if(!this.running)return;
+      this.particles.forEach(p=>{
+        p.t=(p.t+this.speed)%1;
+        p.m.setLatLng(posOnPath(this.pts,p.t));
+      });
+      this._raf=requestAnimationFrame(tick);
+    };
+    this._raf=requestAnimationFrame(tick);
+  }
+  stop(){this.running=false;cancelAnimationFrame(this._raf);}
+  remove(){
+    this.stop();
+    this.particles.forEach(p=>p.m.remove());
+    this.line.remove();
+  }
+}
+
+/* 팝업 마커 (고정 레이블) */
+function simMarker(map,latlng,html,color){
+  const icon=L.divIcon({html:`<div style="background:${color};color:#fff;padding:4px 8px;
+    border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;
+    box-shadow:0 2px 8px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2)">${html}</div>`,
+    className:'',iconAnchor:[0,12]});
+  return L.marker(latlng,{icon,zIndexOffset:2000}).addTo(map);
+}
+
+/* 맥박 원 마커 */
+function pulseMarker(map,latlng,color,r){
+  r=r||20;
+  const icon=L.divIcon({
+    html:`<div style="width:${r}px;height:${r}px;border-radius:50%;
+      border:3px solid ${color};animation:pulseGlow 1.2s ease-in-out infinite;
+      box-shadow:0 0 12px ${color};"></div>`,
+    className:'',iconSize:[r,r],iconAnchor:[r/2,r/2]});
+  return L.marker(latlng,{icon,zIndexOffset:3000}).addTo(map);
+}
+
+/* simMap 초기화 */
+function initSimMap(){
+  if(simMap)return;
+  simMap=L.map('sim-map',{center:[36.5,127.5],zoom:8,zoomControl:true});
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    {attribution:'© CARTO',subdomains:'abcd',maxZoom:19}).addTo(simMap);
+  // DC 클러스터 폴리곤 레이어 초기 렌더
+  renderSimCluster();
+}
+
+function renderSimCluster(){
+  if(!simMap||!simRegion.cluster_geom)return;
+  const c=simScenario==='power'?'#FFD700':simScenario==='water'?'#3BC4F2':'#39D353';
+  if(simMap._clusterLayer)simMap._clusterLayer.remove();
+  simMap._clusterLayer=L.geoJSON({type:'Feature',geometry:simRegion.cluster_geom},{
+    style:{color:c,weight:2,fillColor:c,fillOpacity:0.25}
+  }).addTo(simMap);
+  simMap.fitBounds(simMap._clusterLayer.getBounds(),{padding:[60,60]});
+}
+
+/* 시나리오 선택 */
+function setScenario(sc){
+  simScenario=sc;
+  ['power','water','traffic'].forEach(s=>{
+    const b=document.getElementById('sc-btn-'+s);
+    if(b)b.className='sc-btn'+(s===sc?' sc-active':'');
   });
-  document.getElementById('power-subs').innerHTML=subsHtml;
-
-  // 게이지
-  const avail=r.total_avail_mw;
-  const pct=Math.min(100,demand/avail*100);
-  const gc=pct<70?'var(--gr)':pct<90?'var(--or)':'var(--rd)';
-  document.getElementById('power-gauge').innerHTML=
-    gaugeHtml(`수요 ${demand}MW / 가용 ${avail}MW`,Math.round(pct),100,gc);
-
-  // 결과 태그
-  const tag=pct<70?`<span class="stag stag-ok">✅ 충분</span>`:
-    pct<90?`<span class="stag stag-warn">⚠️ 주의</span>`:
-    `<span class="stag stag-bad">🚨 위험</span>`;
-  document.getElementById('power-result').innerHTML=
-    `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-      ${tag}<span style="font-size:11px;color:var(--txt2)">가용 여유: ${avail-demand}MW</span></div>`;
+  renderSimInfraList();
+  renderSimCluster();
+  resetMapSim();
 }
 
-function runPowerTimeline(){
-  const demand=parseInt(document.getElementById('sl-power').value);
+/* 사이드패널 인프라 목록 렌더 */
+function renderSimInfraList(){
   const r=simRegion;
-  const avail=r.total_avail_mw;
-  const ok=avail>=demand;
-
-  const items=[
-    {t:'T+0s',cls:'dot-err',msg:'⚡ 전력 수요 급증 감지',
-     detail:`요청 ${demand}MW — UPS/배터리 자동 전환 (최대 10~15분 버팀)`},
-    {t:'T+30s',cls:'dot-warn',msg:'📡 인근 변전소 긴급 알림 전송',
-     detail:`${r.substations[0]?.name||'인근변전소'} (${r.substations[0]?.dist_km||'?'}km) 응답 대기`},
-    ...r.substations.slice(0,3).map((s,i)=>({
-      t:`T+${s.response_min}분`,
-      cls: i===0?'dot-info':'dot-info',
-      msg:`🔌 ${s.name} 응답 완료`,
-      detail:`+${s.est_cap_mw}MW 공급 개시 (${s.dist_km}km, ${s.voltage_kv}kV)`
-    })),
-    ok?{t:'T+'+(r.substations.slice(0,3).reduce((a,s)=>Math.max(a,s.response_min),0)+5)+'분',
-        cls:'dot-ok',msg:'✅ 전력 공급 균형 달성',
-        detail:`총 ${Math.min(avail,demand+50)}MW 공급 → 수요 ${demand}MW 충족`}:
-       {t:'T+30분',cls:'dot-err',msg:'🚨 공급 부족 — 부하 분산 필요',
-        detail:`가용 ${avail}MW < 수요 ${demand}MW → 인근 지역 계통 연계 검토 필요`},
-    {t:ok?'T+20분':'T+60분',cls:'dot-ok',msg:'📊 계통 안정화',
-     detail:ok?'정상 운영 재개':'비상 프로토콜 진행 중'}
-  ];
-
-  const tl=document.getElementById('power-timeline');
-  tl.innerHTML=''; tl.style.borderTop='1px solid var(--bd)'; tl.style.marginTop='8px'; tl.style.paddingTop='10px';
-  items.forEach((it,i)=>{
-    const d=document.createElement('div');
-    d.className='tl-item';
-    d.style.animationDelay=(i*0.15)+'s';
-    d.innerHTML=`<div class="tl-dot ${it.cls}"></div>
-      <div class="tl-line">
-        <div class="tl-time">${it.t}</div>
-        <div class="tl-msg">${it.msg}</div>
-        <div class="tl-detail">${it.detail}</div>
+  let html='';
+  if(simScenario==='power'){
+    html='<div style="font-size:11px;color:var(--txt2);margin-bottom:5px;font-weight:700;">인근 154kV+ 변전소 (실데이터)</div>';
+    r.substations.forEach((s,i)=>{
+      const c=i===0?'#FFD700':'#FFA500';
+      html+=`<div class="sub-row">
+        <div class="sub-dot" style="background:${c};box-shadow:0 0 4px ${c};"></div>
+        <div style="flex:1;min-width:0">
+          <div style="color:var(--txt);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.name}</div>
+          <div style="color:var(--txt2)">${s.dist_km}km · ${s.voltage_kv}kV · ~${s.est_cap_mw}MW</div>
+        </div>
       </div>`;
-    setTimeout(()=>{d.classList.add('anim'); tl.appendChild(d);}, i*200);
-  });
-}
-
-// ═══ 냉각수 시뮬레이션 ═══════════════════════════════════════════════════════
-function updateWaterSim(){
-  const mw=parseInt(document.getElementById('sl-mw').value);
-  document.getElementById('sl-mw-val').textContent=mw+' MW';
-  const r=simRegion;
-
-  // 100MW당 약 4500m³/h 냉각수 필요 (공냉 보조 시 30% 절감 가정)
-  const need_m3h=Math.round(mw*45*0.7);
-  const need_m3d=Math.round(need_m3h*24/10000)/100; // 만 m³/일
-
-  const wScore=r.scores.s_water;
-  // 수계 점수 기반 공급 가능 여부
-  const supplyPct=Math.min(100,wScore);
-  const gc=supplyPct>70?'var(--cy)':supplyPct>50?'var(--or)':'var(--rd)';
-
-  document.getElementById('water-need').innerHTML=
-    `<div style="font-size:11px;color:var(--txt2);margin-bottom:4px;">냉각수 필요량 (공냉 혼합 기준)</div>
-    <div class="igrid">
-      <div class="icard"><div class="icard-l">시간당 필요</div><div class="icard-v" style="color:var(--cy)">${need_m3h.toLocaleString()} m³/h</div></div>
-      <div class="icard"><div class="icard-l">일간 필요</div><div class="icard-v">${need_m3d}만 m³/일</div></div>
-      <div class="icard"><div class="icard-l">수계 거리 (실측)</div><div class="icard-v">${r.water_dist_km} km</div></div>
-      <div class="icard"><div class="icard-l">냉각수 등급</div><div class="icard-v">${r.water_grade}</div></div>
+    });
+    html+=`<div style="margin-top:8px;padding:8px;background:var(--bg3);border-radius:6px;font-size:11px;">
+      <div style="color:var(--txt2)">서울 데이터 수요 연결</div>
+      <div style="color:#FFD700;font-weight:700">서울 → 데이터센터 아크 표시</div>
     </div>`;
-
-  document.getElementById('water-gauge').innerHTML=
-    gaugeHtml(`냉각수 접근성 스코어 ${wScore}/100`,wScore,100,gc);
-
-  const tag=supplyPct>70?`<span class="stag stag-ok">✅ 공급 가능</span>`:
-    supplyPct>50?`<span class="stag stag-warn">⚠️ 보완 필요</span>`:
-    `<span class="stag stag-bad">🚨 부족 — 추가 수원 필요</span>`;
-  document.getElementById('water-result').innerHTML=
-    `<div style="margin-bottom:8px;">${tag}</div>`;
-}
-
-function runWaterTimeline(){
-  const r=simRegion;
-  const wScore=r.scores.s_water;
-  const ok=wScore>70;
-  const items=[
-    {t:'T+0',cls:'dot-info',msg:'💧 냉각수 수요 분석',
-     detail:`수계까지 ${r.water_dist_km}km — 스코어 ${wScore}/100`},
-    {t:'단기',cls:ok?'dot-ok':'dot-warn',msg:ok?'✅ 인근 수계 취수 가능':'⚠️ 취수 펌프 라인 연장 필요',
-     detail:ok?`${r.water_dist_km}km 거리 → 도수 파이프 설치 (기간 6~12개월)`:
-       `${r.water_dist_km}km → 중규모 펌프시설 + 정수처리 필요`},
-    {t:'중기',cls:'dot-info',msg:'❄️ 하이브리드 냉각 시스템 적용',
-     detail:'공랭식(40%)+수냉식(60%) 혼합 → 수요량 30% 절감 가능'},
-    {t:'장기',cls:'dot-ok',msg:'♻️ 폐열 재활용 시스템 구축',
-     detail:'인근 농업/온실용 폐열 공급 검토 → 지역 상생'},
-    {t:'결론',cls:ok?'dot-ok':'dot-warn',
-     msg:ok?'✅ 냉각수 공급 안정적':'⚠️ 시설 투자 후 운영 가능',
-     detail:ok?'수계 근접 → 취수 비용 최소화':'추가 투자 필요하나 불가 수준 아님'}
-  ];
-  const tl=document.getElementById('water-timeline');
-  tl.innerHTML=''; tl.style.borderTop='1px solid var(--bd)'; tl.style.marginTop='8px'; tl.style.paddingTop='10px';
-  items.forEach((it,i)=>{
-    const d=document.createElement('div'); d.className='tl-item';
-    d.innerHTML=`<div class="tl-dot ${it.cls}"></div><div class="tl-line">
-      <div class="tl-time">${it.t}</div><div class="tl-msg">${it.msg}</div>
-      <div class="tl-detail">${it.detail}</div></div>`;
-    setTimeout(()=>{d.classList.add('anim'); tl.appendChild(d);}, i*200);
-  });
-}
-
-// ═══ 교통 시뮬레이션 ═════════════════════════════════════════════════════════
-function updateTrafficSim(){
-  const trucks=parseInt(document.getElementById('sl-truck').value);
-  document.getElementById('sl-truck-val').textContent=trucks+' 대/일';
-  const r=simRegion;
-  const tScore=r.scores.s_transport;
-  const road_d=r.road_dist_km;
-  const tc=tScore>70?'var(--gr)':tScore>50?'var(--or)':'var(--rd)';
-
-  document.getElementById('traffic-info').innerHTML=
-    `<div class="igrid">
-      <div class="icard"><div class="icard-l">도로 거리 (실측)</div><div class="icard-v">${road_d} km</div></div>
-      <div class="icard"><div class="icard-l">교통 스코어</div><div class="icard-v" style="color:${tc}">${tScore}/100</div></div>
-      <div class="icard"><div class="icard-l">1일 물동량</div><div class="icard-v">${trucks}대×20t</div></div>
-      <div class="icard"><div class="icard-l">연간 장비 반입</div><div class="icard-v">${Math.round(trucks*250)}회/년</div></div>
+  } else if(simScenario==='water'){
+    html=`<div style="font-size:11px;color:var(--txt2);margin-bottom:5px;font-weight:700;">수계 정보</div>
+    <div class="sub-row"><div class="sub-dot" style="background:#3BC4F2;box-shadow:0 0 4px #3BC4F2;"></div>
+    <div><div style="color:var(--txt);font-weight:600;">인근 수계</div>
+    <div style="color:var(--txt2)">${r.water_dist_km}km · 등급: ${r.water_grade}</div></div></div>
+    <div style="margin-top:8px;padding:8px;background:var(--bg3);border-radius:6px;font-size:11px;">
+      <div style="color:#3BC4F2;font-weight:700">냉각수 공급 경로 표시</div>
+      <div style="color:var(--txt2)">100MW당 약 3,150m³/h 필요</div>
     </div>`;
-  document.getElementById('traffic-gauge').innerHTML=
-    gaugeHtml(`교통 접근성 스코어 ${tScore}/100`,tScore,100,tc);
-
-  const tag=tScore>70?`<span class="stag stag-ok">✅ 원활</span>`:
-    tScore>50?`<span class="stag stag-warn">⚠️ 개선 필요</span>`:
-    `<span class="stag stag-bad">🚨 접근로 구축 필요</span>`;
-  document.getElementById('traffic-result').innerHTML=`<div style="margin-bottom:8px;">${tag}</div>`;
+  } else {
+    html=`<div style="font-size:11px;color:var(--txt2);margin-bottom:5px;font-weight:700;">교통 인프라</div>
+    <div class="sub-row"><div class="sub-dot" style="background:#39D353;box-shadow:0 0 4px #39D353;"></div>
+    <div><div style="color:var(--txt);font-weight:600;">주요 도로</div>
+    <div style="color:var(--txt2)">${r.road_dist_km}km · 스코어 ${r.scores.s_transport}/100</div></div></div>
+    <div style="margin-top:8px;padding:8px;background:var(--bg3);border-radius:6px;font-size:11px;">
+      <div style="color:#39D353;font-weight:700">서울 ↔ 데이터센터 물류 경로</div>
+    </div>`;
+  }
+  const el=document.getElementById('sc-infra-list');
+  if(el)el.innerHTML=html;
 }
 
-function runTrafficTimeline(){
-  const r=simRegion; const tScore=r.scores.s_transport;
-  const ok=tScore>70;
-  const items=[
-    {t:'초기',cls:'dot-info',msg:'🗺 교통 접근성 분석',
-     detail:`도로까지 ${r.road_dist_km}km — 스코어 ${tScore}/100`},
-    {t:'건설기',cls:ok?'dot-ok':'dot-warn',
-     msg:ok?'✅ 기존 도로망 활용 가능':'⚠️ 산업단지 진입로 신설 필요',
-     detail:ok?'주요 도로 근접 → 대형 장비 반입 용이':'진입로 1~2km 개설 (사업비 약 20~50억원)'},
-    {t:'운영기',cls:'dot-info',msg:'🚛 정기 물류 루트 확립',
-     detail:'부품 교체, 장비 반입, 인력 통근 버스 등'},
-    {t:'비상시',cls:'dot-ok',msg:'🚁 대안 접근 경로 확보',
-     detail:'헬기 착륙 공간 + 비상 차량 접근로 사전 지정'},
-    {t:'결론',cls:ok?'dot-ok':'dot-warn',
-     msg:ok?'✅ 교통 인프라 양호':'⚠️ 진입로 투자 필요',
-     detail:ok?'도로 근접성 확보 → 물류 비용 최소화':'초기 도로 투자 후 운영 정상화 가능'}
-  ];
-  const tl=document.getElementById('traffic-timeline');
-  tl.innerHTML=''; tl.style.borderTop='1px solid var(--bd)'; tl.style.marginTop='8px'; tl.style.paddingTop='10px';
-  items.forEach((it,i)=>{
-    const d=document.createElement('div'); d.className='tl-item';
-    d.innerHTML=`<div class="tl-dot ${it.cls}"></div><div class="tl-line">
-      <div class="tl-time">${it.t}</div><div class="tl-msg">${it.msg}</div>
-      <div class="tl-detail">${it.detail}</div></div>`;
-    setTimeout(()=>{d.classList.add('anim'); tl.appendChild(d);}, i*200);
+/* 지역 변경 */
+function onSimRegionChange(){
+  const sel=document.getElementById('sim-region-sel');
+  simRegion=REGIONS.find(r=>r.rank===parseInt(sel.value))||REGIONS[0];
+  renderSimInfraList();
+  renderSimCluster();
+  resetMapSim();
+}
+
+/* 초기화 */
+function resetMapSim(){
+  simAnimators.forEach(a=>{if(a&&a.remove)a.remove();});
+  simAnimators=[];
+  if(simMap){
+    simMap.eachLayer(l=>{
+      if(l!==simMap._clusterLayer&&!(l instanceof L.TileLayer))
+        try{l.remove();}catch(e){}
+    });
+    renderSimCluster();
+  }
+  const rp=document.getElementById('sc-result');
+  if(rp)rp.innerHTML='';
+}
+
+/* 결과 타임라인 아이템 추가 */
+function addTL(html,delay){
+  setTimeout(()=>{
+    const rp=document.getElementById('sc-result');
+    if(!rp)return;
+    const d=document.createElement('div');
+    d.className='tl2-item';
+    d.style.animationDelay='0s';
+    d.innerHTML=html;
+    rp.appendChild(d);
+    rp.scrollTop=rp.scrollHeight;
+  },delay);
+}
+
+/* ══════════════════════════════════════════════════════════
+   메인 시뮬레이션 실행
+═══════════════════════════════════════════════════════════ */
+function runMapSim(){
+  initSimMap();
+  resetMapSim();
+  const r=simRegion;
+  const dc=[r.best_lat,r.best_lon];
+  const rp=document.getElementById('sc-result');
+  if(rp)rp.innerHTML='';
+
+  if(simScenario==='power') runPowerMapSim(r,dc);
+  else if(simScenario==='water') runWaterMapSim(r,dc);
+  else runTrafficMapSim(r,dc);
+}
+
+/* ── 전력 시뮬레이션 ─────────────────────────────────────── */
+function runPowerMapSim(r,dc){
+  // T+0: DC 경보 맥박
+  const pulse=pulseMarker(simMap,dc,'#FF4444',28);
+  simAnimators.push({remove:()=>pulse.remove()});
+  addTL(`<div style="color:#FF4444;font-weight:700">⚡ T+0s 전력 수요 급증 감지</div>
+    <div style="color:var(--txt2);font-size:10px;">UPS 자동 전환 (최대 15분)</div>`,0);
+
+  // T+1s: 서울→DC 데이터 수요 아크 (흰색)
+  setTimeout(()=>{
+    const seoulArc=curvedArc(SEOUL,dc,80,0.3);
+    const seoulLine=L.polyline(seoulArc,{color:'#aaaaff',weight:1.5,opacity:0.5,dashArray:'4 6'}).addTo(simMap);
+    simAnimators.push({remove:()=>seoulLine.remove()});
+    // 서울 마커
+    const sm=simMarker(simMap,SEOUL,'🏙 서울 수요지','#7B68EE');
+    simAnimators.push({remove:()=>sm.remove()});
+    // 서울→DC 아크 파티클 (연보라)
+    const seoulAnim=new PathAnimator(simMap,seoulArc,'#9B8CFF',4,0.003,6);
+    seoulAnim.start(); simAnimators.push(seoulAnim);
+    addTL(`<div style="color:#9B8CFF;font-weight:700">📡 T+1s 서울 수요 연결 아크</div>
+      <div style="color:var(--txt2);font-size:10px;">서울↔${r.sido} ${r.sigungu} 데이터 링크</div>`,0);
+  },1000);
+
+  // T+2s~: 각 변전소 순차 활성화
+  r.substations.slice(0,4).forEach((s,i)=>{
+    setTimeout(()=>{
+      const subPos=[s.lat,s.lon];
+      const arc=curvedArc(subPos,dc,60,0.15);
+      // 변전소 마커
+      const sm=simMarker(simMap,subPos,`⚡ ${s.name}`, i===0?'#FFD700':'#FFA500');
+      simAnimators.push({remove:()=>sm.remove()});
+      // 전력선 파티클 (노란색 점, 빠르게)
+      const col=i===0?'#FFD700':'#FFA500';
+      const pa=new PathAnimator(simMap,arc,col,i===0?6:4,0.006-(i*0.001),i===0?10:8);
+      pa.start(); simAnimators.push(pa);
+      addTL(`<div style="color:${col};font-weight:700">🔌 T+${s.response_min}분 ${s.name}</div>
+        <div style="color:var(--txt2);font-size:10px;">${s.dist_km}km · +${s.est_cap_mw}MW 공급 개시</div>`,
+        200);
+    }, 2000+i*800);
   });
+
+  // 완료
+  const totalTime=2000+r.substations.slice(0,4).length*800+1000;
+  setTimeout(()=>{
+    const ok=r.total_avail_mw>=100;
+    addTL(`<div style="color:${ok?'#39D353':'#FF4444'};font-weight:700">
+      ${ok?'✅':'🚨'} 공급 ${ok?'균형':'부족'} — 총 ${r.total_avail_mw}MW 가용</div>
+      <div style="color:var(--txt2);font-size:10px;">${ok?'정상 운영 재개':'부하 분산 검토 필요'}</div>`,0);
+    // DC 맥박 초록으로 전환
+    pulse.remove();
+    const ok_pulse=pulseMarker(simMap,dc,ok?'#39D353':'#FF4444',28);
+    simAnimators.push({remove:()=>ok_pulse.remove()});
+  }, totalTime);
 }
 
-// ═══ 종합 운영 가능성 ════════════════════════════════════════════════════════
+/* ── 냉각수 시뮬레이션 ──────────────────────────────────── */
+function runWaterMapSim(r,dc){
+  // 수원 위치 추정 (수계 거리 기반, 북서방향)
+  const waterPos=offsetPos(dc[0],dc[1],Math.max(r.water_dist_km,0.3),315);
+  const arc=curvedArc(waterPos,dc,60,0.12);
+
+  addTL(`<div style="color:#3BC4F2;font-weight:700">💧 T+0 냉각수 수요 계산</div>
+    <div style="color:var(--txt2);font-size:10px;">수계 ${r.water_dist_km}km · 등급 ${r.water_grade}</div>`,0);
+
+  setTimeout(()=>{
+    // 서울→DC 연결 (데이터 부하)
+    const seoulArc=curvedArc(SEOUL,dc,80,0.28);
+    const seoulAnim=new PathAnimator(simMap,seoulArc,'#9B8CFF',3,0.003,5);
+    seoulAnim.start(); simAnimators.push(seoulAnim);
+    const sm=simMarker(simMap,SEOUL,'🏙 서울 열부하','#7B68EE');
+    simAnimators.push({remove:()=>sm.remove()});
+    addTL(`<div style="color:#9B8CFF">📡 서울 데이터 요청 → 발열 증가</div>`,0);
+  },800);
+
+  setTimeout(()=>{
+    // 수원 마커
+    const wm=simMarker(simMap,waterPos,`💧 인근 수계 (${r.water_dist_km}km)`,'#1E90FF');
+    simAnimators.push({remove:()=>wm.remove()});
+    // 파란 물방울 파티클
+    const pa=new PathAnimator(simMap,arc,'#3BC4F2',6,0.004,9);
+    pa.start(); simAnimators.push(pa);
+    // DC 마커
+    const pulse=pulseMarker(simMap,dc,'#3BC4F2',28);
+    simAnimators.push({remove:()=>pulse.remove()});
+    addTL(`<div style="color:#3BC4F2;font-weight:700">🌊 취수 펌프 가동</div>
+      <div style="color:var(--txt2);font-size:10px;">${(100*45*0.7).toLocaleString()}m³/h 공급 시작</div>`,0);
+  },1800);
+
+  setTimeout(()=>{
+    addTL(`<div style="color:#39D353;font-weight:700">❄️ 냉각 사이클 정상화</div>
+      <div style="color:var(--txt2);font-size:10px;">공랭(40%)+수냉(60%) 하이브리드</div>`,0);
+  },3500);
+}
+
+/* ── 교통 시뮬레이션 ────────────────────────────────────── */
+function runTrafficMapSim(r,dc){
+  // 서울→DC 물류 아크
+  const seoulArc=curvedArc(SEOUL,dc,80,0.28);
+  // 인근 도로 포인트
+  const roadPos=offsetPos(dc[0],dc[1],Math.max(r.road_dist_km,0.2),180);
+  const roadArc=curvedArc(roadPos,dc,30,0.05);
+
+  addTL(`<div style="color:#39D353;font-weight:700">🚛 T+0 물류 시뮬레이션 시작</div>
+    <div style="color:var(--txt2);font-size:10px;">도로 ${r.road_dist_km}km · 스코어 ${r.scores.s_transport}/100</div>`,0);
+
+  setTimeout(()=>{
+    const sm=simMarker(simMap,SEOUL,'🏙 서울 출발지','#7B68EE');
+    simAnimators.push({remove:()=>sm.remove()});
+    // 서울→DC 트럭 파티클 (초록)
+    const pa=new PathAnimator(simMap,seoulArc,'#39D353',5,0.0035,10);
+    pa.start(); simAnimators.push(pa);
+    addTL(`<div style="color:#39D353;font-weight:700">🚛 서울 출발 → 데이터센터 물류</div>
+      <div style="color:var(--txt2);font-size:10px;">장비 반입 · 서버 교체 · 인력 이동</div>`,0);
+  },500);
+
+  setTimeout(()=>{
+    // 도로→DC 접근로
+    const rm=simMarker(simMap,roadPos,`🛣 주요 도로 (${r.road_dist_km}km)`,'#39D353');
+    simAnimators.push({remove:()=>rm.remove()});
+    const pa2=new PathAnimator(simMap,roadArc,'#90EE90',3,0.006,7);
+    pa2.start(); simAnimators.push(pa2);
+    const pulse=pulseMarker(simMap,dc,'#39D353',28);
+    simAnimators.push({remove:()=>pulse.remove()});
+    addTL(`<div style="color:#90EE90;font-weight:700">🏗 접근로 진입</div>
+      <div style="color:var(--txt2);font-size:10px;">진입로 ${r.road_dist_km}km → DC 반입</div>`,0);
+  },1800);
+
+  setTimeout(()=>{
+    addTL(`<div style="color:#39D353;font-weight:700">✅ 물류 정상화</div>
+      <div style="color:var(--txt2);font-size:10px;">연간 ${Math.round(50*250)}회 물동량 처리 가능</div>`,0);
+  },3500);
+}
+
+// ─── 지역 선택 초기화 ────────────────────────────────────────────────────────
+(function initSimRegionSel(){
+  const sel=document.getElementById('sim-region-sel');
+  if(!sel)return;
+  REGIONS.forEach(r=>{
+    const o=document.createElement('option');
+    o.value=r.rank;
+    o.textContent=`${r.rank}위 ${r.sido} ${r.sigungu} (${r.final_score}점)`;
+    sel.appendChild(o);
+  });
+  renderSimInfraList();
+})();
+
+// sim탭 클릭 시 지도 초기화
+document.querySelectorAll('.tbtab').forEach((t,i)=>{
+  if(i===1) t.addEventListener('click',()=>{
+    setTimeout(()=>{if(simMap)simMap.invalidateSize();else initSimMap();},100);
+  });
+});
+
+
 let overallChart=null;
 function updateOverall(){
   const r=simRegion;
