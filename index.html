@@ -135,7 +135,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       </div>
       <div style="border-left:3px solid var(--gr);padding-left:10px;">
         <p style="color:var(--gr);font-weight:600;margin-bottom:4px;">④ 하이퍼스케일 K=4 기준</p>
-        <p>K = ceil(100,000m² ÷ (62,500m² × 건폐율40%)) = 4격자 = 25ha</p>
+        <p>K = ceil(목표연면적 ÷ (격자면적 × 격자별건폐율)) ≥ 4격자
+예) 공업지역: ceil(100,000÷(62,500×0.70))=3 / 계획관리: ceil(100,000÷(62,500×0.40))=4</p>
       </div>
     </div>
   </div>
@@ -229,11 +230,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       </div>
       <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:16px;border-left:4px solid var(--rd);">
         <p style="color:var(--rd);font-weight:700;margin-bottom:8px;">③ Spectral Graph Clustering</p>
-        <p style="font-size:12px;color:var(--txt2);line-height:1.7;">인접 격자 그래프 G=(V,E) 구성<br>Laplacian L=D−W 고유벡터 분해<br>K-means (K=4) → 최소 4격자 연속</p>
+        <p style="font-size:12px;color:var(--txt2);line-height:1.7;">① BFS: 인접 격자 연결 → 연속 부지<br>② Laplacian L=D−W 고유벡터 분해<br>③ K-means K=4 + 건폐율 격자별 적용<br>(공업 70% · 계획관리 40% · 농림 20%)</p>
       </div>
       <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:16px;border-left:4px solid var(--gr);">
         <p style="color:var(--gr);font-weight:700;margin-bottom:8px;">④ 하이퍼스케일 K=4 근거</p>
-        <p style="font-size:12px;color:var(--txt2);line-height:1.7;"><code style="background:var(--bg3);padding:2px 6px;border-radius:4px;">K = ceil(100,000 ÷ (62,500×0.40)) = 4</code><br><br>건폐율 40% (산업시설 실효 기준)<br>4격자 = 부지 25ha · 연면적 10만m²<br>거시 AHP CR=0.014: 전력35%·재해20%·냉각20%·신재생15%·네트워크5%</p>
+        <p style="font-size:12px;color:var(--txt2);line-height:1.7;"><code style="background:var(--bg3);padding:2px 6px;border-radius:4px;">K = ceil(100,000 ÷ (62,500 × 격자별건폐율))
+공업70%→3격자 / 계획관리40%→4격자</code><br><br>건폐율 40% (산업시설 실효 기준)<br>4격자 = 부지 25ha · 연면적 10만m²<br>거시 AHP CR=0.014: 전력35%·재해20%·냉각20%·신재생15%·네트워크5%</p>
       </div>
     </div>
   </div>
