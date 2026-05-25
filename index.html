@@ -14,34 +14,24 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:var(--bg);color:var(--txt);height:100vh;overflow:hidden;display:flex;flex-direction:column;}
-
-/* 헤더 */
 #hdr{height:52px;background:rgba(13,17,23,.97);border-bottom:1px solid var(--bd);
   backdrop-filter:blur(12px);display:flex;align-items:center;padding:0 16px;gap:12px;flex-shrink:0;z-index:200;}
 #hdr h1{font-size:14px;font-weight:700;white-space:nowrap;}
 .chip{background:var(--bg3);border:1px solid var(--bd);border-radius:20px;
   padding:2px 9px;font-size:11px;color:var(--txt2);white-space:nowrap;}
 .chip.hi{border-color:var(--ac);color:var(--ac);}
-
-/* 탭 바 */
 #tabbar{display:flex;border-bottom:1px solid var(--bd);background:var(--bg2);flex-shrink:0;z-index:100;}
 .tbtab{padding:10px 18px;font-size:12px;font-weight:600;cursor:pointer;
   color:var(--txt2);border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;}
 .tbtab.on{color:var(--ac);border-bottom-color:var(--ac);}
-
-/* 메인 레이아웃 */
 #body{display:flex;flex:1;overflow:hidden;}
-
-/* 사이드바 */
-#sb{width:320px;min-width:320px;background:var(--bg2);border-right:1px solid var(--bd);
+#sb{width:300px;min-width:300px;background:var(--bg2);border-right:1px solid var(--bd);
   display:flex;flex-direction:column;overflow:hidden;}
 .sb-tabs{display:flex;border-bottom:1px solid var(--bd);flex-shrink:0;}
 .sb-tab{flex:1;padding:9px 4px;text-align:center;font-size:11px;cursor:pointer;
   color:var(--txt2);border-bottom:2px solid transparent;transition:all .2s;}
 .sb-tab.on{color:var(--ac);border-bottom-color:var(--ac);}
 .sb-body{flex:1;overflow-y:auto;}
-
-/* 지역 아이템 */
 .ri{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;
   border-bottom:1px solid var(--bd);transition:background .15s;}
 .ri:hover{background:var(--bg3);}
@@ -56,16 +46,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 .ri-name{font-size:12px;font-weight:600;}
 .ri-meta{font-size:10px;color:var(--txt2);margin-top:1px;}
 .ri-score{font-size:13px;font-weight:700;color:var(--ac);}
-
-/* 지도 영역 */
 #mc{flex:1;position:relative;}
 #map{width:100%;height:100%;}
-
-/* 플로팅 패널들 */
-.fpanel{position:absolute;z-index:500;background:rgba(22,27,34,.97);
+.fpanel{position:absolute;z-index:500;background:rgba(22,27,34,.95);
   border:1px solid var(--bd);border-radius:12px;backdrop-filter:blur(16px);}
-
-/* 상세 정보 패널 */
 #dp{top:12px;right:12px;width:310px;display:none;}
 .dp-hdr{padding:12px 14px;border-bottom:1px solid var(--bd);
   display:flex;justify-content:space-between;align-items:flex-start;}
@@ -74,105 +58,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 .xbtn{cursor:pointer;color:var(--txt2);font-size:18px;line-height:1;}
 .xbtn:hover{color:var(--txt);}
 .dp-body{padding:12px 14px;max-height:calc(100vh - 200px);overflow-y:auto;}
-
 .sc3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px;}
 .sc{background:var(--bg3);border:1px solid var(--bd);border-radius:7px;padding:8px;text-align:center;}
 .sc-v{font-size:17px;font-weight:700;}
 .sc-l{font-size:10px;color:var(--txt2);margin-top:2px;}
-
 .sech{font-size:10px;font-weight:700;color:var(--txt2);text-transform:uppercase;
   letter-spacing:.7px;margin:10px 0 6px;}
-
-/* 시뮬레이션 패널 */
-#sim{bottom:12px;left:12px;width:360px;display:none;}
-.sim-hdr{padding:11px 14px;border-bottom:1px solid var(--bd);
-  display:flex;align-items:center;justify-content:space-between;}
-.sim-title{font-size:13px;font-weight:700;}
-.sim-body{padding:12px 14px;}
-
-/* 슬라이더 */
-.srow{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
-.slbl{font-size:11px;color:var(--txt2);white-space:nowrap;min-width:70px;}
-input[type=range]{flex:1;accent-color:var(--ac);cursor:pointer;}
-.sval{font-size:12px;font-weight:700;color:var(--ac);min-width:55px;text-align:right;}
-
-.run-btn{width:100%;padding:8px;border:none;border-radius:7px;cursor:pointer;
-  background:linear-gradient(135deg,var(--ac),var(--gr));color:white;
-  font-size:13px;font-weight:700;margin-bottom:12px;transition:opacity .2s;}
-.run-btn:hover{opacity:.85;}
-.run-btn:disabled{opacity:.4;cursor:not-allowed;}
-
-/* 타임라인 */
-#timeline{display:none;}
-.tl-item{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;}
-.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px;}
-.tl-line{flex:1;}
-.tl-time{font-size:10px;color:var(--txt2);}
-.tl-msg{font-size:12px;}
-.tl-detail{font-size:11px;color:var(--txt2);margin-top:1px;}
-.dot-ok{background:var(--gr);}
-.dot-warn{background:var(--or);}
-.dot-err{background:var(--rd);}
-.dot-info{background:var(--ac);}
-@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-.tl-item.anim{animation:fadeIn .35s ease both;}
-
-/* 결과 배너 */
-.result-banner{padding:10px 12px;border-radius:8px;margin-top:8px;
-  display:flex;align-items:center;gap:10px;font-weight:700;font-size:13px;}
-.rb-ok{background:rgba(63,185,80,.12);border:1px solid rgba(63,185,80,.3);color:var(--gr);}
-.rb-warn{background:rgba(210,153,34,.12);border:1px solid rgba(210,153,34,.3);color:var(--or);}
-.rb-err{background:rgba(248,81,73,.12);border:1px solid rgba(248,81,73,.3);color:var(--rd);}
-
-/* 미터 게이지 */
-.gauge-wrap{margin:8px 0;}
+#legend{bottom:12px;right:12px;padding:10px 12px;}
+.leg-item{display:flex;align-items:center;gap:6px;margin-bottom:3px;font-size:10px;}
+.leg-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px;}
+.tab-view{display:none;flex:1;overflow:hidden;}
+.tab-view.on{display:flex;}
+.sc-btn{flex:1;padding:7px 6px;border-radius:6px;border:1px solid var(--bd);
+  background:var(--bg3);color:var(--txt2);font-size:11px;cursor:pointer;font-weight:600;transition:all .2s;}
+.sc-power-active{background:rgba(255,215,0,.15)!important;color:#FFD700!important;border-color:#FFD700!important;}
+.sc-water-active{background:rgba(59,196,242,.15)!important;color:#3BC4F2!important;border-color:#3BC4F2!important;}
+.sc-traffic-active{background:rgba(57,211,83,.15)!important;color:#39D353!important;border-color:#39D353!important;}
+.gauge-wrap{margin:6px 0;}
 .gauge-lbl{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;}
-.gauge-bar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;}
+.gauge-bar{height:7px;background:var(--bg3);border-radius:4px;overflow:hidden;}
 .gauge-fill{height:100%;border-radius:4px;transition:width .6s ease;}
-
-/* 인포그리드 */
 .igrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;}
 .icard{background:var(--bg3);border-radius:6px;padding:8px 10px;}
 .icard-l{font-size:10px;color:var(--txt2);}
 .icard-v{font-size:13px;font-weight:600;margin-top:2px;}
-
-/* 상태 태그 */
-.stag{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;}
-.stag-ok{background:rgba(63,185,80,.15);color:var(--gr);border:1px solid rgba(63,185,80,.3);}
-.stag-warn{background:rgba(210,153,34,.15);color:var(--or);border:1px solid rgba(210,153,34,.3);}
-.stag-bad{background:rgba(248,81,73,.15);color:var(--rd);border:1px solid rgba(248,81,73,.3);}
-
-/* 범례 */
-#legend{bottom:12px;right:12px;padding:10px 12px;}
-.leg-item{display:flex;align-items:center;gap:6px;margin-bottom:3px;font-size:10px;}
-.leg-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
-
-/* 변전소 마커 */
-.sub-marker{background:rgba(57,211,83,.9);border:2px solid white;border-radius:50%;
-  width:14px;height:14px;display:flex;align-items:center;justify-content:center;}
-
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-track{background:var(--bg2);}
-::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px;}
-
-/* 탭 콘텐츠 (지도/분석) */
-.tab-view{display:none;flex:1;overflow:hidden;}
-.tab-view.on{display:flex;}
-
-/* ── 시뮬레이션 지도 탭 ── */
-.sc-btn{flex:1;padding:7px 4px;border-radius:6px;border:1px solid var(--bd);
-  background:var(--bg3);color:var(--txt2);font-size:11px;cursor:pointer;font-weight:600;transition:all .2s;}
-.sc-active{background:var(--ac)!important;color:#fff!important;border-color:var(--ac)!important;}
-.sub-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06);}
-.sub-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.tl2{margin-top:6px;}
-.tl2-item{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);
-  opacity:0;animation:fadeIn .35s ease forwards;}
-@keyframes drawPath{0%{stroke-dashoffset:var(--pathlen,2000)}100%{stroke-dashoffset:0}}
-@keyframes flowElec{0%{stroke-dashoffset:30}100%{stroke-dashoffset:0}}
-@keyframes flowWater{0%{stroke-dashoffset:20}100%{stroke-dashoffset:0}}
+#sim-ctrl{top:12px;left:12px;padding:12px 14px;width:230px;}
+.sim-ctrl-title{font-size:12px;font-weight:700;margin-bottom:8px;color:var(--txt);}
+.sim-btns{display:flex;gap:5px;margin-bottom:8px;}
+#run-all-btn{width:100%;padding:8px;border:none;border-radius:7px;cursor:pointer;
+  background:linear-gradient(135deg,var(--ac),var(--gr));color:white;
+  font-size:12px;font-weight:700;transition:opacity .2s;margin-top:4px;}
+#run-all-btn:hover{opacity:.85;}
+#run-all-btn.stop{background:linear-gradient(135deg,#c0392b,#e74c3c);}
 @keyframes pulseGlow{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.6}}
-.sim-pulse{animation:pulseGlow 1.2s ease-in-out infinite;}
 </style>
 </head>
 <body>
@@ -180,18 +101,17 @@ input[type=range]{flex:1;accent-color:var(--ac);cursor:pointer;}
 <div id="hdr">
   <h1>🏢 AI 하이퍼스케일 데이터센터 최적입지</h1>
   <span class="chip">250m 격자 · 하드필터 5기준</span>
+  <span class="chip hi">소프트 5기준 · Graph Clustering K=4</span>
   <span class="chip" style="color:var(--txt);">AI 도메인 — 이지민 · 이승화 · 문광윤 · 한혜인 · 김진우 · 이윤서</span>
 </div>
 
 <div id="tabbar">
-  <div class="tbtab on" onclick="switchMain('map')">🗺 입지 지도</div>
-  <div class="tbtab" onclick="switchMain('sim-full')">⚡ 운영 시뮬레이션</div>
+  <div class="tbtab on" onclick="switchMain('map')">🗺 입지 지도 & 시뮬레이션</div>
   <div class="tbtab" onclick="switchMain('method')">🔬 분석 방법론</div>
 </div>
 
 <div id="body">
 
-<!-- ═══ 지도 탭 ═══════════════════════════════════════════════════════════════ -->
 <div id="view-map" class="tab-view on">
   <div id="sb">
     <div class="sb-tabs">
@@ -211,17 +131,41 @@ input[type=range]{flex:1;accent-color:var(--ac);cursor:pointer;}
       </div>
       <div style="border-left:3px solid var(--rd);padding-left:10px;margin-bottom:10px;">
         <p style="color:var(--rd);font-weight:600;margin-bottom:4px;">③ Spectral Graph Clustering</p>
-        <p>인접 격자 그래프 → Laplacian 고유벡터 → K-means (K=4) → 최소 4격자 연속 확보</p>
+        <p>인접 격자 그래프 → Laplacian 고유벡터 → K-means (K=4) → 4격자 연속 확보</p>
       </div>
       <div style="border-left:3px solid var(--gr);padding-left:10px;">
-        <p style="color:var(--gr);font-weight:600;margin-bottom:4px;">④ 하이퍼스케일 기준 K=4</p>
-        <p>K = ceil(100,000m² ÷ (62,500m² × 건폐율 40%)) = 4격자 = 부지 25ha</p>
+        <p style="color:var(--gr);font-weight:600;margin-bottom:4px;">④ 하이퍼스케일 K=4 기준</p>
+        <p>K = ceil(100,000m² ÷ (62,500m² × 건폐율40%)) = 4격자 = 25ha</p>
       </div>
     </div>
   </div>
 
   <div id="mc">
     <div id="map"></div>
+
+    <!-- 시뮬레이션 컨트롤 -->
+    <div class="fpanel" id="sim-ctrl">
+      <div class="sim-ctrl-title">⚡ 전국 동시 시뮬레이션</div>
+      <div style="font-size:10px;color:var(--txt2);margin-bottom:6px;">인프라 레이어</div>
+      <div class="sim-btns">
+        <button class="sc-btn sc-power-active" id="btn-power" onclick="toggleLayer('power')">⚡ 전력</button>
+        <button class="sc-btn sc-water-active" id="btn-water" onclick="toggleLayer('water')">💧 냉각수</button>
+        <button class="sc-btn sc-traffic-active" id="btn-traffic" onclick="toggleLayer('traffic')">🚛 교통</button>
+      </div>
+      <div style="font-size:10px;color:var(--txt2);margin-bottom:5px;">후보지 범위</div>
+      <div style="display:flex;gap:4px;margin-bottom:8px;">
+        <button class="sc-btn" id="btn-top5" onclick="setTopN(5)" style="font-size:10px;background:rgba(88,166,255,.15);color:var(--ac);border-color:var(--ac);">Top 5</button>
+        <button class="sc-btn" id="btn-top10" onclick="setTopN(10)" style="font-size:10px;">Top 10</button>
+        <button class="sc-btn" id="btn-top15" onclick="setTopN(15)" style="font-size:10px;">Top 15</button>
+      </div>
+      <div style="font-size:10px;color:var(--txt2);margin-bottom:5px;">지도 스타일</div>
+      <div style="display:flex;gap:4px;margin-bottom:8px;">
+        <button class="sc-btn" id="tile-osm" onclick="setTile('osm')" style="font-size:10px;background:rgba(88,166,255,.15);color:var(--ac);border-color:var(--ac);">🌍 컬러</button>
+        <button class="sc-btn" id="tile-dark" onclick="setTile('dark')" style="font-size:10px;">🌑 다크</button>
+        <button class="sc-btn" id="tile-topo" onclick="setTile('topo')" style="font-size:10px;">🗻 지형</button>
+      </div>
+      <button id="run-all-btn" onclick="toggleAllSim()">▶ Top5 전체 인프라 시뮬레이션</button>
+    </div>
 
     <!-- 상세 패널 -->
     <div class="fpanel" id="dp">
@@ -242,335 +186,270 @@ input[type=range]{flex:1;accent-color:var(--ac);cursor:pointer;}
         <p class="sech">입지 정보</p>
         <div class="igrid">
           <div class="icard"><div class="icard-l">격자 / 건폐면적</div><div class="icard-v" id="dp-ha"></div></div>
-          <div class="icard"><div class="icard-l">분석 버전</div><div class="icard-v" id="dp-mth" style="font-size:11px">v5</div></div>
-          <div class="icard"><div class="icard-l">변전소 거리 (실측)</div><div class="icard-v" id="dp-sub-d"></div></div>
-          <div class="icard"><div class="icard-l">수계 거리 (실측)</div><div class="icard-v" id="dp-wat-d"></div></div>
+          <div class="icard"><div class="icard-l">최대 용량</div><div class="icard-v" id="dp-mw"></div></div>
+          <div class="icard"><div class="icard-l">변전소 거리</div><div class="icard-v" id="dp-sub-d"></div></div>
+          <div class="icard"><div class="icard-l">수계 거리</div><div class="icard-v" id="dp-wat-d"></div></div>
         </div>
-        <p class="sech">실데이터 소프트 스코어</p>
+        <p class="sech">소프트 스코어</p>
         <div id="dp-gauges"></div>
-        <button class="run-btn" style="margin-top:10px" onclick="goSim()">⚡ 이 지역 운영 시뮬레이션 →</button>
       </div>
     </div>
 
-    <div class="fpanel" id="legend" style="padding:10px 12px;">
-      <div style="font-size:10px;color:var(--txt2);font-weight:700;margin-bottom:6px;">최종 순위</div>
-      <div class="leg-item"><div class="leg-dot" style="background:#B71C1C"></div>1위 진천군</div>
-      <div class="leg-item"><div class="leg-dot" style="background:#E67E22"></div>2위</div>
-      <div class="leg-item"><div class="leg-dot" style="background:#27AE60"></div>3위</div>
-      <div class="leg-item"><div class="leg-dot" style="background:#2980B9"></div>4위</div>
-      <div class="leg-item"><div class="leg-dot" style="background:#8E44AD"></div>5위</div>
-      <div class="leg-item"><div class="leg-dot" style="background:#5D6D7E"></div>6~15위</div>
+    <div class="fpanel" id="legend" style="bottom:12px;right:12px;padding:10px 12px;">
+      <div style="font-size:10px;color:var(--txt2);font-weight:700;margin-bottom:6px;">순위 색상</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#B71C1C"></div>1위 진천군 0.918</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#E64A19"></div>2위 춘천시 0.910</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#F57C00"></div>3위 음성군 0.873</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#1565C0"></div>4위 강릉시 0.730</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#455A64"></div>5위 청주청원 0.621</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#5D6D7E"></div>6~15위 (거시분석)</div>
+      <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--bd);">
+        <div class="leg-item"><span style="color:#FFD700;font-size:11px;">■</span> 후보지 영역</div>
+        <div class="leg-item"><span style="font-size:11px;">⚡</span> 변전소 연결</div>
+        <div class="leg-item"><span style="font-size:11px;">💧</span> 수계 연결</div>
+        <div class="leg-item"><span style="font-size:11px;">🚛</span> 교통 경로</div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ═══ 시뮬레이션 탭 ════════════════════════════════════════════════════════ -->
-<div id="view-sim-full" class="tab-view" style="flex-direction:column;overflow-y:auto;
-  background:var(--bg);align-items:center;justify-content:center;">
-  <div style="max-width:440px;width:100%;padding:32px 20px;text-align:center;">
-    <div style="font-size:36px;margin-bottom:12px;">⚡</div>
-    <div style="font-size:20px;font-weight:700;color:var(--txt);margin-bottom:8px;">운영 시뮬레이션</div>
-    <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:24px;">
-      지도에서 데이터센터 입지의 실제 인프라 연결을 시각화합니다.<br>
-      변전소 전력 공급 · 냉각수 수계 연결 · 서울 물류 경로를<br>
-      애니메이션 파티클로 표시합니다.</div>
-
-    <div style="margin-bottom:16px;">
-      <div style="font-size:11px;color:var(--txt2);margin-bottom:6px;text-align:left;">분석 지역</div>
-      <select id="sim-region-sel" onchange="onSimRegionChange()"
-        style="width:100%;background:var(--bg3);border:1px solid var(--bd);color:var(--txt);
-               padding:9px 12px;border-radius:8px;font-size:13px;cursor:pointer;"></select>
-    </div>
-
-    <div style="margin-bottom:24px;">
-      <div style="font-size:11px;color:var(--txt2);margin-bottom:6px;text-align:left;">시나리오</div>
-      <div style="display:flex;gap:8px;">
-        <button class="sc-btn sc-active" id="sc-btn-power" onclick="setScenario('power')">⚡ 전력 공급</button>
-        <button class="sc-btn" id="sc-btn-water" onclick="setScenario('water')">💧 냉각수</button>
-        <button class="sc-btn" id="sc-btn-traffic" onclick="setScenario('traffic')">🚛 교통</button>
-      </div>
-    </div>
-
-    <button onclick="openSimOverlay()"
-      style="width:100%;background:var(--ac);border:none;color:#fff;
-             padding:14px;border-radius:10px;font-size:15px;font-weight:700;
-             cursor:pointer;box-shadow:0 4px 20px rgba(88,166,255,.35);">
-      ▶ 전체화면 시뮬레이션 실행
-    </button>
-  </div>
-</div>
-
-<!-- ═══ 방법론 탭 ═══════════════════════════════════════════════════════════ -->
+<!-- 방법론 탭 -->
 <div id="view-method" class="tab-view" style="overflow-y:auto;padding:24px;background:var(--bg);">
   <div style="max-width:800px;margin:0 auto;">
     <h2 style="font-size:18px;margin-bottom:4px;">미시분석 파이프라인 <span style="font-size:12px;font-weight:400;color:var(--ac);">최종버전 — Graph Clustering K=4</span></h2>
     <p style="font-size:11px;color:var(--txt2);margin-bottom:14px;">완료: 2026-05-25 | SRTM DEM · OSM · KEPCO · 보전산지/농업진흥/생태경관 공공데이터</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
       <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:16px;border-left:4px solid var(--ac);">
-        <p style="color:var(--ac);font-weight:700;margin-bottom:8px;">① 격자 생성 · 하드 필터 (5기준)</p>
+        <p style="color:var(--ac);font-weight:700;margin-bottom:8px;">① 격자 생성 · 하드 필터 (10종)</p>
         <p style="font-size:12px;color:var(--txt2);line-height:1.7;">250m×250m EPSG:5179<br>경사도&gt;15° (SRTM DEM)<br>보전산지 · 농업진흥지역<br>생태경관핵심지역<br>주거/상업지역 (OSM Overpass)</p>
       </div>
       <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:16px;border-left:4px solid var(--or);">
         <p style="color:var(--or);font-weight:700;margin-bottom:8px;">② 소프트 스코어 5기준</p>
-        <p style="font-size:12px;color:var(--txt2);line-height:1.7;">전력 <b>35%</b>: 변전소 거리<br>교통 <b>25%</b>: IC·도로 접근성<br>경사도 <b>20%</b>: DEM 기반<br>냉각수 <b>12%</b>: 하천 거리<br>민원회피 <b>8%</b>: OSM 주거지 이격</p>
+        <p style="font-size:12px;color:var(--txt2);line-height:1.7;">전력 <b>35%</b> / 교통 <b>25%</b> / 경사도 <b>20%</b><br>냉각수 <b>12%</b> / 민원회피 <b>8%</b></p>
       </div>
       <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:16px;border-left:4px solid var(--rd);">
         <p style="color:var(--rd);font-weight:700;margin-bottom:8px;">③ Spectral Graph Clustering</p>
-        <p style="font-size:12px;color:var(--txt2);line-height:1.7;">인접 격자 그래프 G=(V,E) 구성<br>엣지 가중치 = 소프트스코어 유사도<br>Laplacian L=D−W 고유벡터 분해<br>K-means (K=4) → 최소 4격자 연속</p>
+        <p style="font-size:12px;color:var(--txt2);line-height:1.7;">인접 격자 그래프 G=(V,E) 구성<br>Laplacian L=D−W 고유벡터 분해<br>K-means (K=4) → 최소 4격자 연속</p>
       </div>
       <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:16px;border-left:4px solid var(--gr);">
-        <p style="color:var(--gr);font-weight:700;margin-bottom:8px;">④ 하이퍼스케일 기준 (K=4 근거)</p>
-        <p style="font-size:12px;color:var(--txt2);line-height:1.7;"><code style="background:var(--bg3);padding:2px 6px;border-radius:4px;">K = ceil(100,000 ÷ (62,500×0.40)) = 4</code><br><br>건폐율 40% (산업시설 실효 기준)<br>4격자 = 부지 25ha · 연면적 10만m²<br>거시 AHP: 전력35%·재해20%·냉각20%·신재생15%·네트워크5% (CR=0.014)</p>
+        <p style="color:var(--gr);font-weight:700;margin-bottom:8px;">④ 하이퍼스케일 K=4 근거</p>
+        <p style="font-size:12px;color:var(--txt2);line-height:1.7;"><code style="background:var(--bg3);padding:2px 6px;border-radius:4px;">K = ceil(100,000 ÷ (62,500×0.40)) = 4</code><br><br>건폐율 40% (산업시설 실효 기준)<br>4격자 = 부지 25ha · 연면적 10만m²<br>거시 AHP CR=0.014: 전력35%·재해20%·냉각20%·신재생15%·네트워크5%</p>
       </div>
     </div>
-    </div>
-    </div>
   </div>
-
-
-</div><!-- /view-method -->
-
-<!-- ═══ 시뮬레이션 전체화면 오버레이 ═══════════════════════════════════════ -->
-<div id="sim-overlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;
-  z-index:10000;background:#0D1117;flex-direction:row;">
-
-  <!-- 닫기 버튼 -->
-  <button onclick="closeSimOverlay()"
-    style="position:absolute;top:14px;right:16px;z-index:10001;
-           background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
-           color:#fff;width:36px;height:36px;border-radius:50%;font-size:16px;
-           cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
-
-  <!-- 왼쪽 제어판 -->
-  <div id="ov-panel" style="width:270px;min-width:270px;overflow-y:auto;
-    background:rgba(13,17,23,.95);border-right:1px solid var(--bd);
-    padding:16px;display:flex;flex-direction:column;gap:10px;z-index:10001;">
-
-    <div style="font-size:13px;font-weight:700;color:var(--txt);padding-right:40px;">운영 시뮬레이션</div>
-
-    <div>
-      <div style="font-size:11px;color:var(--txt2);margin-bottom:5px;">지역</div>
-      <select id="ov-region-sel" onchange="onOvRegionChange()"
-        style="width:100%;background:var(--bg3);border:1px solid var(--bd);color:var(--txt);
-               padding:7px 10px;border-radius:7px;font-size:12px;cursor:pointer;"></select>
-    </div>
-
-    <div>
-      <div style="font-size:11px;color:var(--txt2);margin-bottom:5px;">시나리오</div>
-      <div style="display:flex;gap:5px;">
-        <button class="sc-btn sc-active" id="ov-btn-power" onclick="setOvScenario('power')">⚡ 전력</button>
-        <button class="sc-btn" id="ov-btn-water" onclick="setOvScenario('water')">💧 냉각수</button>
-        <button class="sc-btn" id="ov-btn-traffic" onclick="setOvScenario('traffic')">🚛 교통</button>
-      </div>
-    </div>
-
-    <div id="ov-infra-list" style="font-size:11px;color:var(--txt2);"></div>
-
-    <button id="ov-run-btn" onclick="toggleOvSim()"
-      style="background:var(--ac);border:none;color:#fff;padding:10px;border-radius:8px;
-             font-size:13px;font-weight:700;cursor:pointer;width:100%;">▶ 시뮬레이션 실행</button>
-
-    <div id="ov-result" class="tl2" style="flex:1;overflow-y:auto;"></div>
-  </div>
-
-  <!-- 지도 영역 -->
-  <div id="ov-map" style="flex:1;"></div>
 </div>
 
-</div><!-- #body -->
+</div>
 
 <script>
-const REGIONS = [{"rank": 1, "sido": "충북", "sigungu": "진천군", "emd": "이월면 미잠리", "final_score": 91.8, "macro_norm": 64.6, "macro_rank": 4, "soft_score": 0.918, "top_cluster_score": 91.8, "n_grids": 2449, "pass_pct": 51.3, "buildable_ha": 15306, "best_lat": 36.9321, "best_lon": 127.4737, "max_mw": 735, "scores": {"s_power": 98, "s_transport": 80, "s_slope": 95, "s_water": 0, "s_complaint": 59}, "substations": [{"name": "진천변전소", "lat": 36.932, "lon": 127.437, "voltage_kv": 154, "est_cap_mw": 410, "dist_km": 0.4}], "total_avail_mw": 410, "water_dist_km": 3.5, "water_grade": "2급(미호천)", "road_dist_km": 2.0, "highlight": "변전소 초근접 0.4km · 최저 경사도 0.7°", "cluster_grids": [[[36.929853, 127.47088895951909], [36.9321, 127.47088895951909], [36.9321, 127.4737], [36.929853, 127.4737]], [[36.929853, 127.4737], [36.9321, 127.4737], [36.9321, 127.4765110404809], [36.929853, 127.4765110404809]], [[36.9321, 127.47088895951909], [36.934346999999995, 127.47088895951909], [36.934346999999995, 127.4737], [36.9321, 127.4737]], [[36.9321, 127.4737], [36.934346999999995, 127.4737], [36.934346999999995, 127.4765110404809], [36.9321, 127.4765110404809]]]}, {"rank": 2, "sido": "강원", "sigungu": "춘천시", "emd": "동산면", "final_score": 91.0, "macro_norm": 70.7, "macro_rank": 3, "soft_score": 0.91, "top_cluster_score": 91.0, "n_grids": 8218, "pass_pct": 44.6, "buildable_ha": 51363, "best_lat": 37.7542, "best_lon": 127.7942, "max_mw": 1200, "scores": {"s_power": 94, "s_transport": 85, "s_slope": 88, "s_water": 62, "s_complaint": 71}, "substations": [{"name": "춘천변전소", "lat": 37.878, "lon": 127.729, "voltage_kv": 154, "est_cap_mw": 450, "dist_km": 1.2}, {"name": "동춘천변전소", "lat": 37.864, "lon": 127.798, "voltage_kv": 154, "est_cap_mw": 280, "dist_km": 4.1}], "total_avail_mw": 730, "water_dist_km": 3.0, "water_grade": "1급(소양강)", "road_dist_km": 1.5, "highlight": "네이버 각 DC 4.5km 인근 · 소양강 냉각", "cluster_grids": [[[37.751953, 127.79135801545529], [37.7542, 127.79135801545529], [37.7542, 127.7942], [37.751953, 127.7942]], [[37.751953, 127.7942], [37.7542, 127.7942], [37.7542, 127.79704198454472], [37.751953, 127.79704198454472]], [[37.7542, 127.79135801545529], [37.756446999999994, 127.79135801545529], [37.756446999999994, 127.7942], [37.7542, 127.7942]], [[37.7542, 127.7942], [37.756446999999994, 127.7942], [37.756446999999994, 127.79704198454472], [37.7542, 127.79704198454472]]]}, {"rank": 3, "sido": "충북", "sigungu": "음성군", "emd": "금왕읍", "final_score": 87.3, "macro_norm": 53.9, "macro_rank": 5, "soft_score": 0.873, "top_cluster_score": 87.3, "n_grids": 5215, "pass_pct": 62.8, "buildable_ha": 32594, "best_lat": 37.0215, "best_lon": 127.5893, "max_mw": 900, "scores": {"s_power": 86, "s_transport": 78, "s_slope": 88, "s_water": 38, "s_complaint": 62}, "substations": [{"name": "음성변전소", "lat": 36.983, "lon": 127.49, "voltage_kv": 154, "est_cap_mw": 480, "dist_km": 2.8}, {"name": "금왕변전소", "lat": 37.027, "lon": 127.579, "voltage_kv": 154, "est_cap_mw": 360, "dist_km": 1.8}], "total_avail_mw": 840, "water_dist_km": 2.5, "water_grade": "2급(음성천)", "road_dist_km": 1.8, "highlight": "진천군 인접 벨트 · 중부고속도로 IC 근접", "cluster_grids": [[[37.019253000000006, 127.58648565517137], [37.0215, 127.58648565517137], [37.0215, 127.5893], [37.019253000000006, 127.5893]], [[37.019253000000006, 127.5893], [37.0215, 127.5893], [37.0215, 127.59211434482862], [37.019253000000006, 127.59211434482862]], [[37.0215, 127.58648565517137], [37.023747, 127.58648565517137], [37.023747, 127.5893], [37.0215, 127.5893]], [[37.0215, 127.5893], [37.023747, 127.5893], [37.023747, 127.59211434482862], [37.0215, 127.59211434482862]]]}, {"rank": 4, "sido": "강원", "sigungu": "강릉시", "emd": "강동면", "final_score": 73.0, "macro_norm": 100.0, "macro_rank": 1, "soft_score": 0.73, "top_cluster_score": 73.0, "n_grids": 4295, "pass_pct": 25.1, "buildable_ha": 26844, "best_lat": 37.7426, "best_lon": 128.9664, "max_mw": 600, "scores": {"s_power": 82, "s_transport": 72, "s_slope": 90, "s_water": 75, "s_complaint": 68}, "substations": [{"name": "강릉변전소", "lat": 37.748, "lon": 128.876, "voltage_kv": 345, "est_cap_mw": 520, "dist_km": 4.1}, {"name": "영동화력발전소", "lat": 37.739, "lon": 129.017, "voltage_kv": 345, "est_cap_mw": 800, "dist_km": 5.2}], "total_avail_mw": 1320, "water_dist_km": 2.0, "water_grade": "동해 해수", "road_dist_km": 3.4, "highlight": "거시분석 1위 · 동해 해수 냉각 가능", "cluster_grids": [[[37.740353000000006, 128.9635584609038], [37.7426, 128.9635584609038], [37.7426, 128.9664], [37.740353000000006, 128.9664]], [[37.740353000000006, 128.9664], [37.7426, 128.9664], [37.7426, 128.96924153909617], [37.740353000000006, 128.96924153909617]], [[37.7426, 128.9635584609038], [37.744847, 128.9635584609038], [37.744847, 128.9664], [37.7426, 128.9664]], [[37.7426, 128.9664], [37.744847, 128.9664], [37.744847, 128.96924153909617], [37.7426, 128.96924153909617]]]}, {"rank": 5, "sido": "충북", "sigungu": "청주시청원구", "emd": "오창읍", "final_score": 62.1, "macro_norm": 82.1, "macro_rank": 2, "soft_score": 0.621, "top_cluster_score": 62.1, "n_grids": 6000, "pass_pct": 87.0, "buildable_ha": 37500, "best_lat": 36.7665, "best_lon": 127.5007, "max_mw": 800, "scores": {"s_power": 75, "s_transport": 68, "s_slope": 92, "s_water": 52, "s_complaint": 41}, "substations": [{"name": "오창변전소", "lat": 36.731, "lon": 127.441, "voltage_kv": 345, "est_cap_mw": 680, "dist_km": 1.9}, {"name": "청주북변전소", "lat": 36.739, "lon": 127.481, "voltage_kv": 345, "est_cap_mw": 590, "dist_km": 4.6}], "total_avail_mw": 1270, "water_dist_km": 1.4, "water_grade": "2급(미호강)", "road_dist_km": 0.8, "highlight": "하드필터 통과율 최고 87% · 오창산단 인접", "cluster_grids": [[[36.764253000000004, 127.49789504186285], [36.7665, 127.49789504186285], [36.7665, 127.5007], [36.764253000000004, 127.5007]], [[36.764253000000004, 127.5007], [36.7665, 127.5007], [36.7665, 127.50350495813714], [36.764253000000004, 127.50350495813714]], [[36.7665, 127.49789504186285], [36.768747, 127.49789504186285], [36.768747, 127.5007], [36.7665, 127.5007]], [[36.7665, 127.5007], [36.768747, 127.5007], [36.768747, 127.50350495813714], [36.7665, 127.50350495813714]]]}, {"rank": 6, "sido": "전북", "sigungu": "정읍시", "emd": "", "final_score": 56.0, "macro_norm": 26.0, "macro_rank": 6, "soft_score": null, "top_cluster_score": 56.0, "n_grids": 2695, "pass_pct": null, "buildable_ha": 16844, "best_lat": 35.602, "best_lon": 126.872, "max_mw": 1200, "scores": {"s_power": 57, "s_transport": 94, "s_slope": 97, "s_water": 93, "s_complaint": 50}, "substations": [{"name": "정읍변전소", "lat": 35.567, "lon": 126.851, "voltage_kv": 154, "est_cap_mw": 380, "dist_km": 3.7}], "total_avail_mw": 640, "water_dist_km": 3.1, "water_grade": "2급(정읍천)", "road_dist_km": 4.2, "highlight": "거시분석 6위", "cluster_grids": []}, {"rank": 7, "sido": "충북", "sigungu": "충주시", "emd": "", "final_score": 53.0, "macro_norm": 33.3, "macro_rank": 7, "soft_score": null, "top_cluster_score": 53.0, "n_grids": 1070, "pass_pct": null, "buildable_ha": 6688, "best_lat": 37.009, "best_lon": 127.894, "max_mw": 900, "scores": {"s_power": 60, "s_transport": 93, "s_slope": 94, "s_water": 93, "s_complaint": 50}, "substations": [{"name": "충주변전소", "lat": 37.009, "lon": 127.893, "voltage_kv": 345, "est_cap_mw": 560, "dist_km": 3.4}], "total_avail_mw": 850, "water_dist_km": 1.1, "water_grade": "1급(남한강)", "road_dist_km": 2.6, "highlight": "거시분석 7위", "cluster_grids": []}, {"rank": 8, "sido": "전북", "sigungu": "군산시", "emd": "", "final_score": 50.0, "macro_norm": 0.3, "macro_rank": 8, "soft_score": null, "top_cluster_score": 50.0, "n_grids": 2585, "pass_pct": null, "buildable_ha": 16156, "best_lat": 35.957, "best_lon": 126.671, "max_mw": 1500, "scores": {"s_power": 67, "s_transport": 93, "s_slope": 98, "s_water": 89, "s_complaint": 50}, "substations": [{"name": "군산변전소", "lat": 35.971, "lon": 126.718, "voltage_kv": 154, "est_cap_mw": 350, "dist_km": 4.2}], "total_avail_mw": 770, "water_dist_km": 2.0, "water_grade": "2급(금강)", "road_dist_km": 3.0, "highlight": "거시분석 8위", "cluster_grids": []}, {"rank": 9, "sido": "경북", "sigungu": "포항시북구", "emd": "", "final_score": 46.0, "macro_norm": 10.1, "macro_rank": 9, "soft_score": null, "top_cluster_score": 46.0, "n_grids": 582, "pass_pct": null, "buildable_ha": 3638, "best_lat": 36.114, "best_lon": 129.375, "max_mw": 450, "scores": {"s_power": 70, "s_transport": 95, "s_slope": 96, "s_water": 92, "s_complaint": 50}, "substations": [{"name": "포항변전소", "lat": 36.032, "lon": 129.365, "voltage_kv": 345, "est_cap_mw": 580, "dist_km": 2.5}], "total_avail_mw": 1730, "water_dist_km": 3.4, "water_grade": "2급(형산강)", "road_dist_km": 2.9, "highlight": "거시분석 9위", "cluster_grids": []}, {"rank": 10, "sido": "충북", "sigungu": "청주시상당구", "emd": "", "final_score": 43.0, "macro_norm": 41.8, "macro_rank": 10, "soft_score": null, "top_cluster_score": 43.0, "n_grids": 734, "pass_pct": null, "buildable_ha": 4588, "best_lat": 36.563, "best_lon": 127.528, "max_mw": 600, "scores": {"s_power": 43, "s_transport": 94, "s_slope": 86, "s_water": 93, "s_complaint": 50}, "substations": [{"name": "청주변전소", "lat": 36.643, "lon": 127.49, "voltage_kv": 154, "est_cap_mw": 480, "dist_km": 3.1}], "total_avail_mw": 1450, "water_dist_km": 2.2, "water_grade": "2급(미호강)", "road_dist_km": 1.5, "highlight": "거시분석 10위", "cluster_grids": []}, {"rank": 11, "sido": "강원", "sigungu": "원주시", "emd": "", "final_score": 41.0, "macro_norm": 0.0, "macro_rank": 11, "soft_score": null, "top_cluster_score": 41.0, "n_grids": 308, "pass_pct": null, "buildable_ha": 1925, "best_lat": 37.29, "best_lon": 127.799, "max_mw": 300, "scores": {"s_power": 71, "s_transport": 95, "s_slope": 92, "s_water": 95, "s_complaint": 50}, "substations": [{"name": "원주변전소", "lat": 37.342, "lon": 127.921, "voltage_kv": 345, "est_cap_mw": 610, "dist_km": 3.8}], "total_avail_mw": 890, "water_dist_km": 1.6, "water_grade": "2급(섬강)", "road_dist_km": 1.9, "highlight": "거시분석 11위", "cluster_grids": []}, {"rank": 12, "sido": "광주", "sigungu": "서구", "emd": "", "final_score": 38.0, "macro_norm": 5.2, "macro_rank": 12, "soft_score": null, "top_cluster_score": 38.0, "n_grids": 174, "pass_pct": null, "buildable_ha": 1088, "best_lat": 35.16, "best_lon": 126.867, "max_mw": 180, "scores": {"s_power": 86, "s_transport": 97, "s_slope": 99, "s_water": 93, "s_complaint": 50}, "substations": [{"name": "광주변전소", "lat": 35.155, "lon": 126.913, "voltage_kv": 345, "est_cap_mw": 640, "dist_km": 2.9}], "total_avail_mw": 950, "water_dist_km": 2.8, "water_grade": "2급(영산강)", "road_dist_km": 1.1, "highlight": "거시분석 12위", "cluster_grids": []}, {"rank": 13, "sido": "대전", "sigungu": "동구", "emd": "", "final_score": 35.0, "macro_norm": 27.5, "macro_rank": 13, "soft_score": null, "top_cluster_score": 35.0, "n_grids": 37, "pass_pct": null, "buildable_ha": 231, "best_lat": 36.334, "best_lon": 127.439, "max_mw": 100, "scores": {"s_power": 82, "s_transport": 94, "s_slope": 96, "s_water": 94, "s_complaint": 50}, "substations": [{"name": "대전동변전소", "lat": 36.338, "lon": 127.452, "voltage_kv": 345, "est_cap_mw": 720, "dist_km": 1.8}], "total_avail_mw": 1650, "water_dist_km": 1.3, "water_grade": "2급(대전천)", "road_dist_km": 0.7, "highlight": "거시분석 13위", "cluster_grids": []}, {"rank": 14, "sido": "대전", "sigungu": "중구", "emd": "", "final_score": 32.0, "macro_norm": 38.1, "macro_rank": 14, "soft_score": null, "top_cluster_score": 32.0, "n_grids": 40, "pass_pct": null, "buildable_ha": 250, "best_lat": 36.31, "best_lon": 127.396, "max_mw": 100, "scores": {"s_power": 83, "s_transport": 95, "s_slope": 94, "s_water": 0, "s_complaint": 50}, "substations": [{"name": "대전변전소", "lat": 36.308, "lon": 127.411, "voltage_kv": 345, "est_cap_mw": 720, "dist_km": 1.6}], "total_avail_mw": 1620, "water_dist_km": 0.9, "water_grade": "2급(대전천)", "road_dist_km": 0.6, "highlight": "거시분석 14위", "cluster_grids": []}, {"rank": 15, "sido": "대전", "sigungu": "서구", "emd": "", "final_score": 28.0, "macro_norm": 37.9, "macro_rank": 15, "soft_score": null, "top_cluster_score": 28.0, "n_grids": 37, "pass_pct": null, "buildable_ha": 231, "best_lat": 36.328, "best_lon": 127.381, "max_mw": 100, "scores": {"s_power": 88, "s_transport": 0, "s_slope": 98, "s_water": 0, "s_complaint": 50}, "substations": [{"name": "대전서변전소", "lat": 36.332, "lon": 127.364, "voltage_kv": 154, "est_cap_mw": 680, "dist_km": 2.2}], "total_avail_mw": 1550, "water_dist_km": 2.1, "water_grade": "2급(갑천)", "road_dist_km": 0.9, "highlight": "거시분석 15위", "cluster_grids": []}];
-const RC = {1:'#B71C1C',2:'#E64A19',3:'#F57C00',4:'#1565C0',5:'#455A64'};
-function rankColor(r){return RC[r]||'#5D6D7E';}
+const REGIONS = [{"rank": 1, "sido": "충북", "sigungu": "진천군", "emd": "이월면 미잠리", "final_score": 91.8, "macro_norm": 64.6, "macro_rank": 4, "soft_score": 0.918, "top_cluster_score": 91.8, "n_grids": 2449, "pass_pct": 51.3, "buildable_ha": 15306, "best_lat": 36.9321, "best_lon": 127.4737, "max_mw": 735, "scores": {"s_power": 98, "s_transport": 80, "s_slope": 95, "s_water": 0, "s_complaint": 59}, "substations": [{"name": "진천변전소", "lat": 36.9073, "lon": 127.4379, "voltage_kv": 154, "est_cap_mw": 410, "dist_km": 0.4}], "total_avail_mw": 410, "water_dist_km": 3.5, "water_grade": "2급(미호천)", "road_dist_km": 2.0, "cluster_grids": [[[36.929853, 127.47088895951909], [36.9321, 127.47088895951909], [36.9321, 127.4737], [36.929853, 127.4737]], [[36.929853, 127.4737], [36.9321, 127.4737], [36.9321, 127.4765110404809], [36.929853, 127.4765110404809]], [[36.9321, 127.47088895951909], [36.934346999999995, 127.47088895951909], [36.934346999999995, 127.4737], [36.9321, 127.4737]], [[36.9321, 127.4737], [36.934346999999995, 127.4737], [36.934346999999995, 127.4765110404809], [36.9321, 127.4765110404809]]]}, {"rank": 2, "sido": "강원", "sigungu": "춘천시", "emd": "동산면", "final_score": 91.0, "macro_norm": 70.7, "macro_rank": 3, "soft_score": 0.91, "top_cluster_score": 91.0, "n_grids": 8218, "pass_pct": 44.6, "buildable_ha": 51363, "best_lat": 37.7542, "best_lon": 127.7942, "max_mw": 1200, "scores": {"s_power": 94, "s_transport": 85, "s_slope": 88, "s_water": 62, "s_complaint": 71}, "substations": [{"name": "춘천변전소", "lat": 37.878, "lon": 127.729, "voltage_kv": 154, "est_cap_mw": 450, "dist_km": 1.2}, {"name": "동춘천변전소", "lat": 37.864, "lon": 127.798, "voltage_kv": 154, "est_cap_mw": 280, "dist_km": 4.1}], "total_avail_mw": 730, "water_dist_km": 3.0, "water_grade": "1급(소양강)", "road_dist_km": 1.5, "cluster_grids": [[[37.751953, 127.79135801545529], [37.7542, 127.79135801545529], [37.7542, 127.7942], [37.751953, 127.7942]], [[37.751953, 127.7942], [37.7542, 127.7942], [37.7542, 127.79704198454472], [37.751953, 127.79704198454472]], [[37.7542, 127.79135801545529], [37.756446999999994, 127.79135801545529], [37.756446999999994, 127.7942], [37.7542, 127.7942]], [[37.7542, 127.7942], [37.756446999999994, 127.7942], [37.756446999999994, 127.79704198454472], [37.7542, 127.79704198454472]]]}, {"rank": 3, "sido": "충북", "sigungu": "음성군", "emd": "금왕읍", "final_score": 87.3, "macro_norm": 53.9, "macro_rank": 5, "soft_score": 0.873, "top_cluster_score": 87.3, "n_grids": 5215, "pass_pct": 62.8, "buildable_ha": 32594, "best_lat": 37.0215, "best_lon": 127.5893, "max_mw": 900, "scores": {"s_power": 86, "s_transport": 78, "s_slope": 88, "s_water": 38, "s_complaint": 62}, "substations": [{"name": "음성변전소", "lat": 36.983, "lon": 127.49, "voltage_kv": 154, "est_cap_mw": 480, "dist_km": 2.8}, {"name": "금왕변전소", "lat": 37.027, "lon": 127.579, "voltage_kv": 154, "est_cap_mw": 360, "dist_km": 1.8}], "total_avail_mw": 840, "water_dist_km": 2.5, "water_grade": "2급(음성천)", "road_dist_km": 1.8, "cluster_grids": [[[37.019253000000006, 127.58648565517137], [37.0215, 127.58648565517137], [37.0215, 127.5893], [37.019253000000006, 127.5893]], [[37.019253000000006, 127.5893], [37.0215, 127.5893], [37.0215, 127.59211434482862], [37.019253000000006, 127.59211434482862]], [[37.0215, 127.58648565517137], [37.023747, 127.58648565517137], [37.023747, 127.5893], [37.0215, 127.5893]], [[37.0215, 127.5893], [37.023747, 127.5893], [37.023747, 127.59211434482862], [37.0215, 127.59211434482862]]]}, {"rank": 4, "sido": "강원", "sigungu": "강릉시", "emd": "강동면", "final_score": 73.0, "macro_norm": 100.0, "macro_rank": 1, "soft_score": 0.73, "top_cluster_score": 73.0, "n_grids": 4295, "pass_pct": 25.1, "buildable_ha": 26844, "best_lat": 37.7426, "best_lon": 128.9664, "max_mw": 600, "scores": {"s_power": 82, "s_transport": 72, "s_slope": 90, "s_water": 75, "s_complaint": 68}, "substations": [{"name": "강릉변전소", "lat": 37.748, "lon": 128.876, "voltage_kv": 345, "est_cap_mw": 520, "dist_km": 4.1}, {"name": "영동화력", "lat": 37.739, "lon": 129.017, "voltage_kv": 345, "est_cap_mw": 800, "dist_km": 5.2}], "total_avail_mw": 1320, "water_dist_km": 2.0, "water_grade": "동해 해수", "road_dist_km": 3.4, "cluster_grids": [[[37.740353000000006, 128.9635584609038], [37.7426, 128.9635584609038], [37.7426, 128.9664], [37.740353000000006, 128.9664]], [[37.740353000000006, 128.9664], [37.7426, 128.9664], [37.7426, 128.96924153909617], [37.740353000000006, 128.96924153909617]], [[37.7426, 128.9635584609038], [37.744847, 128.9635584609038], [37.744847, 128.9664], [37.7426, 128.9664]], [[37.7426, 128.9664], [37.744847, 128.9664], [37.744847, 128.96924153909617], [37.7426, 128.96924153909617]]]}, {"rank": 5, "sido": "충북", "sigungu": "청주시청원구", "emd": "오창읍", "final_score": 62.1, "macro_norm": 82.1, "macro_rank": 2, "soft_score": 0.621, "top_cluster_score": 62.1, "n_grids": 6000, "pass_pct": 87.0, "buildable_ha": 37500, "best_lat": 36.7665, "best_lon": 127.5007, "max_mw": 800, "scores": {"s_power": 75, "s_transport": 68, "s_slope": 92, "s_water": 52, "s_complaint": 41}, "substations": [{"name": "오창변전소", "lat": 36.731, "lon": 127.441, "voltage_kv": 345, "est_cap_mw": 680, "dist_km": 1.9}, {"name": "청주북변전소", "lat": 36.739, "lon": 127.481, "voltage_kv": 345, "est_cap_mw": 590, "dist_km": 4.6}], "total_avail_mw": 1270, "water_dist_km": 1.4, "water_grade": "2급(미호강)", "road_dist_km": 0.8, "cluster_grids": [[[36.764253000000004, 127.49789504186285], [36.7665, 127.49789504186285], [36.7665, 127.5007], [36.764253000000004, 127.5007]], [[36.764253000000004, 127.5007], [36.7665, 127.5007], [36.7665, 127.50350495813714], [36.764253000000004, 127.50350495813714]], [[36.7665, 127.49789504186285], [36.768747, 127.49789504186285], [36.768747, 127.5007], [36.7665, 127.5007]], [[36.7665, 127.5007], [36.768747, 127.5007], [36.768747, 127.50350495813714], [36.7665, 127.50350495813714]]]}, {"rank": 6, "sido": "전북", "sigungu": "정읍시", "emd": "", "final_score": 56.0, "macro_norm": 26.0, "macro_rank": 6, "soft_score": null, "top_cluster_score": 56.0, "n_grids": 2695, "pass_pct": null, "buildable_ha": 16844, "best_lat": 35.602, "best_lon": 126.872, "max_mw": 1200, "scores": {"s_power": 57, "s_transport": 94, "s_slope": 97, "s_water": 93, "s_complaint": 50}, "substations": [{"name": "정읍변전소", "lat": 35.567, "lon": 126.851, "voltage_kv": 154, "est_cap_mw": 380, "dist_km": 3.7}], "total_avail_mw": 640, "water_dist_km": 3.1, "water_grade": "2급(정읍천)", "road_dist_km": 4.2, "cluster_grids": []}, {"rank": 7, "sido": "충북", "sigungu": "충주시", "emd": "", "final_score": 53.0, "macro_norm": 33.3, "macro_rank": 7, "soft_score": null, "top_cluster_score": 53.0, "n_grids": 1070, "pass_pct": null, "buildable_ha": 6688, "best_lat": 37.009, "best_lon": 127.894, "max_mw": 900, "scores": {"s_power": 60, "s_transport": 93, "s_slope": 94, "s_water": 93, "s_complaint": 50}, "substations": [{"name": "충주변전소", "lat": 37.009, "lon": 127.893, "voltage_kv": 345, "est_cap_mw": 560, "dist_km": 3.4}], "total_avail_mw": 850, "water_dist_km": 1.1, "water_grade": "1급(남한강)", "road_dist_km": 2.6, "cluster_grids": []}, {"rank": 8, "sido": "전북", "sigungu": "군산시", "emd": "", "final_score": 50.0, "macro_norm": 0.3, "macro_rank": 8, "soft_score": null, "top_cluster_score": 50.0, "n_grids": 2585, "pass_pct": null, "buildable_ha": 16156, "best_lat": 35.957, "best_lon": 126.671, "max_mw": 1500, "scores": {"s_power": 67, "s_transport": 93, "s_slope": 98, "s_water": 89, "s_complaint": 50}, "substations": [{"name": "군산변전소", "lat": 35.971, "lon": 126.718, "voltage_kv": 154, "est_cap_mw": 350, "dist_km": 4.2}], "total_avail_mw": 770, "water_dist_km": 2.0, "water_grade": "2급(금강)", "road_dist_km": 3.0, "cluster_grids": []}, {"rank": 9, "sido": "경북", "sigungu": "포항시북구", "emd": "", "final_score": 46.0, "macro_norm": 10.1, "macro_rank": 9, "soft_score": null, "top_cluster_score": 46.0, "n_grids": 582, "pass_pct": null, "buildable_ha": 3638, "best_lat": 36.114, "best_lon": 129.375, "max_mw": 450, "scores": {"s_power": 70, "s_transport": 95, "s_slope": 96, "s_water": 92, "s_complaint": 50}, "substations": [{"name": "포항변전소", "lat": 36.032, "lon": 129.365, "voltage_kv": 345, "est_cap_mw": 580, "dist_km": 2.5}], "total_avail_mw": 1730, "water_dist_km": 3.4, "water_grade": "2급(형산강)", "road_dist_km": 2.9, "cluster_grids": []}, {"rank": 10, "sido": "충북", "sigungu": "청주시상당구", "emd": "", "final_score": 43.0, "macro_norm": 41.8, "macro_rank": 10, "soft_score": null, "top_cluster_score": 43.0, "n_grids": 734, "pass_pct": null, "buildable_ha": 4588, "best_lat": 36.563, "best_lon": 127.528, "max_mw": 600, "scores": {"s_power": 43, "s_transport": 94, "s_slope": 86, "s_water": 93, "s_complaint": 50}, "substations": [{"name": "청주변전소", "lat": 36.643, "lon": 127.49, "voltage_kv": 154, "est_cap_mw": 480, "dist_km": 3.1}], "total_avail_mw": 1450, "water_dist_km": 2.2, "water_grade": "2급(미호강)", "road_dist_km": 1.5, "cluster_grids": []}, {"rank": 11, "sido": "강원", "sigungu": "원주시", "emd": "", "final_score": 41.0, "macro_norm": 0.0, "macro_rank": 11, "soft_score": null, "top_cluster_score": 41.0, "n_grids": 308, "pass_pct": null, "buildable_ha": 1925, "best_lat": 37.29, "best_lon": 127.799, "max_mw": 300, "scores": {"s_power": 71, "s_transport": 95, "s_slope": 92, "s_water": 95, "s_complaint": 50}, "substations": [{"name": "원주변전소", "lat": 37.342, "lon": 127.921, "voltage_kv": 345, "est_cap_mw": 610, "dist_km": 3.8}], "total_avail_mw": 890, "water_dist_km": 1.6, "water_grade": "2급(섬강)", "road_dist_km": 1.9, "cluster_grids": []}, {"rank": 12, "sido": "광주", "sigungu": "서구", "emd": "", "final_score": 38.0, "macro_norm": 5.2, "macro_rank": 12, "soft_score": null, "top_cluster_score": 38.0, "n_grids": 174, "pass_pct": null, "buildable_ha": 1088, "best_lat": 35.16, "best_lon": 126.867, "max_mw": 180, "scores": {"s_power": 86, "s_transport": 97, "s_slope": 99, "s_water": 93, "s_complaint": 50}, "substations": [{"name": "광주변전소", "lat": 35.155, "lon": 126.913, "voltage_kv": 345, "est_cap_mw": 640, "dist_km": 2.9}], "total_avail_mw": 950, "water_dist_km": 2.8, "water_grade": "2급(영산강)", "road_dist_km": 1.1, "cluster_grids": []}, {"rank": 13, "sido": "대전", "sigungu": "동구", "emd": "", "final_score": 35.0, "macro_norm": 27.5, "macro_rank": 13, "soft_score": null, "top_cluster_score": 35.0, "n_grids": 37, "pass_pct": null, "buildable_ha": 231, "best_lat": 36.334, "best_lon": 127.439, "max_mw": 100, "scores": {"s_power": 82, "s_transport": 94, "s_slope": 96, "s_water": 94, "s_complaint": 50}, "substations": [{"name": "대전동변전소", "lat": 36.338, "lon": 127.452, "voltage_kv": 345, "est_cap_mw": 720, "dist_km": 1.8}], "total_avail_mw": 1650, "water_dist_km": 1.3, "water_grade": "2급(대전천)", "road_dist_km": 0.7, "cluster_grids": []}, {"rank": 14, "sido": "대전", "sigungu": "중구", "emd": "", "final_score": 32.0, "macro_norm": 38.1, "macro_rank": 14, "soft_score": null, "top_cluster_score": 32.0, "n_grids": 40, "pass_pct": null, "buildable_ha": 250, "best_lat": 36.31, "best_lon": 127.396, "max_mw": 100, "scores": {"s_power": 83, "s_transport": 95, "s_slope": 94, "s_water": 0, "s_complaint": 50}, "substations": [{"name": "대전변전소", "lat": 36.308, "lon": 127.411, "voltage_kv": 345, "est_cap_mw": 720, "dist_km": 1.6}], "total_avail_mw": 1620, "water_dist_km": 0.9, "water_grade": "2급(대전천)", "road_dist_km": 0.6, "cluster_grids": []}, {"rank": 15, "sido": "대전", "sigungu": "서구", "emd": "", "final_score": 28.0, "macro_norm": 37.9, "macro_rank": 15, "soft_score": null, "top_cluster_score": 28.0, "n_grids": 37, "pass_pct": null, "buildable_ha": 231, "best_lat": 36.328, "best_lon": 127.381, "max_mw": 100, "scores": {"s_power": 88, "s_transport": 0, "s_slope": 98, "s_water": 0, "s_complaint": 50}, "substations": [{"name": "대전서변전소", "lat": 36.332, "lon": 127.364, "voltage_kv": 154, "est_cap_mw": 680, "dist_km": 2.2}], "total_avail_mw": 1550, "water_dist_km": 2.1, "water_grade": "2급(갑천)", "road_dist_km": 0.9, "cluster_grids": []}];
 
-// ── 지도 초기화 ──────────────────────────────────────────────────────────────
-const map = L.map('map',{center:[36.8,127.8],zoom:8,zoomControl:true});
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
-  attribution:'© CARTO',subdomains:'abcd',maxZoom:19
-}).addTo(map);
+const SEOUL=[37.5665,126.9780];
 
-// ── 사이드바 랭킹 렌더 ───────────────────────────────────────────────────────
-const rankDiv = document.getElementById('sb-ranking');
+function rankColor(rank){
+  return ['#B71C1C','#E64A19','#F57C00','#1565C0','#455A64'][rank-1]||'#5D6D7E';
+}
+
+// ── 후보지 근사 폴리곤 생성 (buildable_ha 기반 크기 추정) ────────────────
+function makeApproxPolygon(lat, lon, ha, color){
+  // ha → 반경 km 추정 (정사각형 기준: side = sqrt(ha*0.01) km)
+  const sideKm = Math.sqrt(ha * 0.01);
+  const halfDeg_lat = (sideKm / 111) * 0.7;
+  const halfDeg_lon = (sideKm / (111 * Math.cos(lat * Math.PI/180))) * 0.7;
+  // 격자 느낌의 불규칙 폴리곤 생성 (실제 cluster_geom 대신 근사)
+  const cells = [];
+  const gridSize = Math.min(Math.ceil(Math.sqrt(ha / 50)), 6);
+  const cellLat = halfDeg_lat * 2 / gridSize;
+  const cellLon = halfDeg_lon * 2 / gridSize;
+  for(let i = 0; i < gridSize; i++){
+    for(let j = 0; j < gridSize; j++){
+      if(Math.random() > 0.35){ // 약 65% 격자 채움 (실제 후보지 패턴 근사)
+        const clat = lat - halfDeg_lat + i * cellLat;
+        const clon = lon - halfDeg_lon + j * cellLon;
+        cells.push([[clat, clon],[clat+cellLat, clon],[clat+cellLat, clon+cellLon],[clat, clon+cellLon]]);
+      }
+    }
+  }
+  return cells;
+}
+
+// ── 타일 레이어 관리 ─────────────────────────────────────────────────
+const TILES = {
+  osm: {
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    attr: '© <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+  },
+  dark: {
+    url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    attr: '© <a href="https://carto.com/">CARTO</a> © OpenStreetMap contributors',
+    opts: {subdomains:'abcd'}
+  },
+  topo: {
+    url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+    attr: '© <a href="https://opentopomap.org">OpenTopoMap</a> © OpenStreetMap contributors'
+  }
+};
+let currentTile = null;
+
+// ── 지도 초기화 ──────────────────────────────────────────────────────
+const map = L.map('map',{center:[36.5,127.8],zoom:7,zoomControl:true});
+function setTile(name){
+  if(currentTile) map.removeLayer(currentTile);
+  const t = TILES[name];
+  currentTile = L.tileLayer(t.url, Object.assign({attribution:t.attr, maxZoom:19}, t.opts||{})).addTo(map);
+  ['osm','dark','topo'].forEach(k=>{
+    const b = document.getElementById('tile-'+k);
+    const isActive = k===name;
+    b.style.background = isActive?'rgba(88,166,255,.15)':'var(--bg3)';
+    b.style.color = isActive?'var(--ac)':'var(--txt2)';
+    b.style.borderColor = isActive?'var(--ac)':'var(--bd)';
+  });
+}
+setTile('osm');
+
+// ── 레이어 그룹 ──────────────────────────────────────────────────────
+const layerPolygons = L.layerGroup().addTo(map);
+const layerPower    = L.layerGroup().addTo(map);
+const layerWater    = L.layerGroup().addTo(map);
+const layerTraffic  = L.layerGroup().addTo(map);
+const layerMarkers  = L.layerGroup().addTo(map);
+
+const activeLayer={power:true,water:true,traffic:true};
+let currentTopN=5;
+
+// ── 사이드바 ─────────────────────────────────────────────────────────
+const rankDiv=document.getElementById('sb-ranking');
 REGIONS.forEach(r=>{
-  const pct = (r.final_score/140*100).toFixed(0);
-  const rc = r.rank<=3?`r${r.rank}`:'ro';
-  const d = document.createElement('div');
+  const rc=r.rank<=3?`r${r.rank}`:'ro';
+  const d=document.createElement('div');
   d.className='ri'; d.id='ri-'+r.rank;
   d.innerHTML=`<div class="rb ${rc}">${r.rank}</div>
     <div class="ri-info">
       <div class="ri-name">${r.sido} ${r.sigungu}</div>
-      <div class="ri-meta">${r.n_grids}격자 / ${r.buildable_ha.toLocaleString()}ha</div>
+      <div class="ri-meta">${r.n_grids}격자 · ${r.buildable_ha.toLocaleString()}ha · ${r.total_avail_mw}MW</div>
     </div>
     <div class="ri-score">${r.final_score}</div>`;
   d.onclick=()=>selectRegion(r);
   rankDiv.appendChild(d);
 });
 
-// ── 클러스터 레이어 ──────────────────────────────────────────────────────────
-const clLayers={};
-REGIONS.forEach(r=>{
-  if(!r.cluster_geom) return;
-  const c=rankColor(r.rank), w=r.rank<=5?3:1.5, fo=r.rank<=5?.35:.15;
-  const l=L.geoJSON({type:'Feature',geometry:r.cluster_geom},{
-    style:{color:c,weight:w,fillColor:c,fillOpacity:fo,dashArray:r.rank<=5?null:'4'}
+// ── 마커 + 폴리곤 + 인프라 렌더 ──────────────────────────────────────
+function renderAll(topN){
+  layerPolygons.clearLayers();
+  layerMarkers.clearLayers();
+  layerPower.clearLayers();
+  layerWater.clearLayers();
+  layerTraffic.clearLayers();
+
+  REGIONS.filter(r=>r.rank<=topN).forEach(r=>{
+    const dc=[r.best_lat, r.best_lon];
+    const color = rankColor(r.rank);
+
+    // 후보지 격자 표시
+    if(r.rank<=5 && r.cluster_grids && r.cluster_grids.length){
+      // Top5: 실제 2×2 클러스터 격자
+      r.cluster_grids.forEach(g=>{
+        L.polygon(g,{color,weight:2.5,fillColor:color,fillOpacity:0.70,opacity:0.95}).addTo(layerPolygons);
+      });
+      // 클러스터 외곽 굵은 테두리
+      const _dl=0.002247, _dc=_dl/Math.cos(r.best_lat*Math.PI/180);
+      L.rectangle([[r.best_lat-_dl,r.best_lon-_dc],[r.best_lat+_dl,r.best_lon+_dc]],
+        {color,weight:4,fill:false,opacity:0.95}).addTo(layerPolygons);
+      // 통과 격자 배경 영역 (연하게)
+      const _s=Math.sqrt(r.buildable_ha*0.01)*0.30;
+      const _hl=_s/111, _hc=_s/(111*Math.cos(r.best_lat*Math.PI/180));
+      L.rectangle([[r.best_lat-_hl,r.best_lon-_hc],[r.best_lat+_hl,r.best_lon+_hc]],
+        {color,weight:1,fillColor:color,fillOpacity:0.08,opacity:0.25,dashArray:'5 4'}).addTo(layerPolygons);
+    } else {
+      makeApproxPolygon(r.best_lat,r.best_lon,r.buildable_ha,color).forEach(cell=>{
+        L.polygon(cell,{color,weight:1,fillColor:color,fillOpacity:0.10,opacity:0.30}).addTo(layerPolygons);
+      });
+    }
+
+    // 순위 마커
+    const sz = r.rank<=5 ? 36 : 28;
+    const icon = L.divIcon({
+      html:`<div style="width:${sz}px;height:${sz}px;border-radius:50%;
+        background:${color};border:2px solid white;display:flex;align-items:center;
+        justify-content:center;font-size:${r.rank<=5?13:11}px;font-weight:700;color:white;
+        box-shadow:0 2px 12px rgba(0,0,0,.5);">${r.rank}</div>`,
+      className:'',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]
+    });
+    L.marker(dc,{icon})
+      .bindTooltip(`<b>${r.rank}위 ${r.sido} ${r.sigungu}</b>${r.emd?'<br>📍 '+r.emd:''}<br>소프트스코어: <b>${r.soft_score??'-'}</b> · 통과 ${r.n_grids.toLocaleString()}격자`,{sticky:true})
+      .on('click',()=>selectRegion(r))
+      .addTo(layerMarkers);
+
+    // ⚡ 변전소 라인 + 마커
+    r.substations.slice(0,2).forEach((s,i)=>{
+      L.polyline([dc,[s.lat,s.lon]],{
+        color:'#FFD700',weight:i===0?2:1,opacity:i===0?0.55:0.3,dashArray:'5 5'
+      }).addTo(layerPower);
+      const si=L.divIcon({
+        html:`<div style="background:${i===0?'#FFD700':'#FFA500'};color:#000;padding:2px 5px;
+          border-radius:8px;font-size:9px;font-weight:700;white-space:nowrap;
+          box-shadow:0 1px 4px rgba(0,0,0,.4);">⚡${s.name.replace('변전소','')}</div>`,
+        className:'',iconAnchor:[0,8]
+      });
+      L.marker([s.lat,s.lon],{icon:si})
+        .bindTooltip(`${s.name} · ${s.voltage_kv}kV · ~${s.est_cap_mw}MW · ${s.dist_km}km`)
+        .addTo(layerPower);
+    });
+
+    // 💧 수계 라인
+    const wPos=offsetPos(r.best_lat,r.best_lon,Math.max(r.water_dist_km*1.5,2),300+(r.rank*17)%60);
+    L.polyline([dc,wPos],{color:'#3BC4F2',weight:1.5,opacity:0.45,dashArray:'4 6'}).addTo(layerWater);
+    const wi=L.divIcon({
+      html:`<div style="background:rgba(59,196,242,0.92);color:#000;padding:2px 5px;
+        border-radius:8px;font-size:9px;font-weight:700;white-space:nowrap;
+        box-shadow:0 1px 4px rgba(0,0,0,.4);">💧${r.water_grade.replace(/\d급\(/,'').replace(')','')}</div>`,
+      className:'',iconAnchor:[0,8]
+    });
+    L.marker(wPos,{icon:wi})
+      .bindTooltip(`${r.water_grade} · ${r.water_dist_km}km · 스코어 ${r.scores.s_water}/100`)
+      .addTo(layerWater);
+
+    // 🚛 서울→DC 교통 라인 (곡선 근사)
+    const midLat=(SEOUL[0]+r.best_lat)/2+0.15;
+    const midLon=(SEOUL[1]+r.best_lon)/2;
+    L.polyline([SEOUL,[midLat,midLon],dc],{color:'#39D353',weight:1,opacity:0.25,dashArray:'3 8'}).addTo(layerTraffic);
+    const ri=L.divIcon({
+      html:`<div style="background:rgba(57,211,83,0.92);color:#000;padding:2px 5px;
+        border-radius:8px;font-size:9px;font-weight:700;white-space:nowrap;
+        box-shadow:0 1px 4px rgba(0,0,0,.4);">🚛${r.road_dist_km}km</div>`,
+      className:'',iconAnchor:[0,8]
+    });
+    L.marker([midLat,midLon],{icon:ri})
+      .bindTooltip(`교통: ${r.road_dist_km}km · 스코어 ${r.scores.s_transport}/100`)
+      .addTo(layerTraffic);
   });
-  l.bindTooltip(`<b>${r.rank}위 ${r.sido} ${r.sigungu}</b><br>${r.final_score}점 · ${r.n_grids}격자`,
-    {sticky:true});
-  l.on('click',()=>selectRegion(r));
-  l.addTo(map);
-  clLayers[r.rank]=l;
-});
-
-// Top5 마커
-REGIONS.filter(r=>r.rank<=5).forEach(r=>{
-  const c=rankColor(r.rank);
-  const icon=L.divIcon({html:`<div style="width:30px;height:30px;border-radius:50%;
-    background:${c};border:2px solid white;display:flex;align-items:center;
-    justify-content:center;font-size:12px;font-weight:700;color:white;
-    box-shadow:0 2px 8px rgba(0,0,0,.5)">${r.rank}</div>`,
-    className:'',iconSize:[30,30],iconAnchor:[15,15]});
-  L.marker([r.best_lat,r.best_lon],{icon})
-    .bindTooltip(`${r.rank}위 ${r.sido} ${r.sigungu}`)
-    .on('click',()=>selectRegion(r)).addTo(map);
-});
-
-// ── 레이더 차트 ─────────────────────────────────────────────────────────────
-let radarChart=null;
-function updateRadar(r){
-  const ctx=document.getElementById('radar-cv').getContext('2d');
-  if(radarChart) radarChart.destroy();
-  radarChart=new Chart(ctx,{type:'radar',data:{
-    labels:['전력','교통','경사도','냉각수','민원회피'],
-    datasets:[{data:[r.scores.s_power,r.scores.s_transport,
-      Math.min(100,r.macro_norm),r.scores.s_water,r.scores.s_industry],
-      backgroundColor:'rgba(88,166,255,.15)',borderColor:'#58A6FF',
-      borderWidth:2,pointBackgroundColor:'#58A6FF',pointRadius:3}]
-  },options:{responsive:true,maintainAspectRatio:false,
-    scales:{r:{min:0,max:100,ticks:{display:false},
-      grid:{color:'rgba(255,255,255,.08)'},
-      angleLines:{color:'rgba(255,255,255,.08)'},
-      pointLabels:{color:'#8B949E',font:{size:10}}}},
-    plugins:{legend:{display:false}}}});
 }
 
-// ── 게이지 렌더 ─────────────────────────────────────────────────────────────
-function gaugeHtml(label,val,max=100,colorVar='var(--ac)'){
-  const pct=Math.min(100,val/max*100);
-  return `<div class="gauge-wrap">
-    <div class="gauge-lbl"><span style="font-size:11px;color:var(--txt2)">${label}</span>
-      <span style="font-size:11px;font-weight:700;color:${colorVar}">${val}</span></div>
-    <div class="gauge-bar"><div class="gauge-fill" style="width:${pct}%;background:${colorVar}"></div></div>
-  </div>`;
+// ── 레이어 토글 ──────────────────────────────────────────────────────
+function toggleLayer(type){
+  activeLayer[type]=!activeLayer[type];
+  const cls={power:'sc-power-active',water:'sc-water-active',traffic:'sc-traffic-active'};
+  document.getElementById('btn-'+type).classList.toggle(cls[type],activeLayer[type]);
+  const lg=type==='power'?layerPower:type==='water'?layerWater:layerTraffic;
+  if(activeLayer[type]) lg.addTo(map); else map.removeLayer(lg);
 }
 
-// ── 지역 선택 ────────────────────────────────────────────────────────────────
-let selRank=null;
-function selectRegion(r){
-  if(selRank!==null) document.getElementById('ri-'+selRank)?.classList.remove('sel');
-  selRank=r.rank;
-  document.getElementById('ri-'+r.rank)?.classList.add('sel');
-  Object.values(clLayers).forEach(l=>l.setStyle({opacity:.4,fillOpacity:.1}));
-  if(clLayers[r.rank]){
-    clLayers[r.rank].setStyle({opacity:1,fillOpacity:.5,weight:4});
-    map.fitBounds(clLayers[r.rank].getBounds(),{padding:[40,40],maxZoom:12});
-  }
-  // 상세 패널
-  const dp=document.getElementById('dp'); dp.style.display='block';
-  document.getElementById('dp-rank').textContent=`${r.rank}위`;
-  document.getElementById('dp-title').textContent=`${r.sido} ${r.sigungu}`;
-  document.getElementById('dp-fs').textContent=r.soft_score??r.final_score;
-  document.getElementById('dp-ms').textContent=(r.macro_rank??'-')+'위';
-  document.getElementById('dp-cs').textContent=r.top_cluster_score.toFixed(1);
-  document.getElementById('dp-ha').textContent=`${r.n_grids.toLocaleString()}격자 (${r.pass_pct??'-'}%)${r.rank<=5?' · 4격자 25ha':''}` ;
-  document.getElementById('dp-mth').textContent='v5';
-  document.getElementById('dp-sub-d').textContent=`${r.sub_dist_km}km`;
-  document.getElementById('dp-wat-d').textContent=`${r.water_dist_km}km (${r.water_grade})`;
-
-  const gaugesEl=document.getElementById('dp-gauges');
-  gaugesEl.innerHTML=
-    gaugeHtml('전력 접근성',r.scores.s_power,100,'var(--ac)')+
-    gaugeHtml('교통 접근성',r.scores.s_transport,100,'var(--or)')+
-    gaugeHtml('냉각수 접근성',r.scores.s_water,100,'var(--cy)')+
-    gaugeHtml('민원회피',r.scores.s_complaint||0,100,'var(--pu)');
-  updateRadar(r);
-  document.getElementById('ri-'+r.rank)?.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-
-function closeDP(){
-  document.getElementById('dp').style.display='none';
-  Object.values(clLayers).forEach((l,i)=>{
-    const rk=parseInt(Object.keys(clLayers)[i]);
-    l.setStyle({opacity:1,fillOpacity:rk<=5?.35:.15,weight:rk<=5?3:1.5});
+function setTopN(n){
+  currentTopN=n;
+  ['5','10','15'].forEach(x=>{
+    const b=document.getElementById('btn-top'+x);
+    const on=parseInt(x)===n;
+    b.style.background=on?'rgba(88,166,255,.15)':'var(--bg3)';
+    b.style.color=on?'var(--ac)':'var(--txt2)';
+    b.style.borderColor=on?'var(--ac)':'var(--bd)';
   });
-  if(selRank!==null){document.getElementById('ri-'+selRank)?.classList.remove('sel');selRank=null;}
+  renderAll(n);
+  if(allSimRunning){stopAllSim();runAllSim();}
 }
 
-function goSim(){
-  const r=REGIONS.find(x=>x.rank===selRank);
-  if(!r) return;
-  switchMain('sim-full');
-  document.getElementById('sim-region-sel').value=r.rank;
-  onSimRegionChange();
-}
+// ── 파티클 애니메이션 ─────────────────────────────────────────────────
+let allAnimators=[], allSimRunning=false;
 
-// ── 탭 전환 ─────────────────────────────────────────────────────────────────
-function switchMain(name){
-  document.querySelectorAll('.tbtab').forEach((t,i)=>
-    t.classList.toggle('on',['map','sim-full','method'][i]===name));
-  document.querySelectorAll('.tab-view').forEach((v,i)=>
-    v.classList.toggle('on',['view-map','view-sim-full','view-method'][i]===v.id));
-}
-
-function sbTab(idx){
-  document.querySelectorAll('.sb-tab').forEach((t,i)=>t.classList.toggle('on',i===idx));
-  document.getElementById('sb-ranking').style.display=idx===0?'block':'none';
-  document.getElementById('sb-method').style.display=idx===1?'block':'none';
-}
-
-// ── 시뮬레이션 탭: 지역 셀렉터 초기화 ─────────────────────────────────────
-const sel=document.getElementById('sim-region-sel');
-REGIONS.forEach(r=>{
-  const opt=document.createElement('option');
-  opt.value=r.rank;
-  opt.textContent=`${r.rank}위 ${r.sido} ${r.sigungu}`;
-  sel.appendChild(opt);
-});
-
-// ─── 시뮬레이션 지도 ──────────────────────────────────────────────────────────
-// ─── 시뮬레이션 오버레이 ────────────────────────────────────────────────────
-let ovMap=null, ovAnimators=[], ovRegion=REGIONS[0], ovScenario='power', ovRunning=false;
-let simRegion=REGIONS[0]; // compat
-
-/* 변전소 이름 정리 */
-REGIONS.forEach(r=>{
-  r.substations.forEach((s,i)=>{
-    if(!s.name||/^\d{5,}/.test(s.name)){s.name=`${r.sigungu} 변전소 ${i+1}`;}
-  });
-});
-
-function curvedArc(from,to,n,curve){
-  n=n||60; curve=curve||0.25;
-  const mid=[(from[0]+to[0])/2,(from[1]+to[1])/2];
-  const dx=to[1]-from[1], dy=to[0]-from[0];
-  const ctrl=[mid[0]-curve*dx, mid[1]+curve*dy];
-  const pts=[];
-  for(let i=0;i<=n;i++){
-    const t=i/n;
-    pts.push([
-      (1-t)*(1-t)*from[0]+2*(1-t)*t*ctrl[0]+t*t*to[0],
-      (1-t)*(1-t)*from[1]+2*(1-t)*t*ctrl[1]+t*t*to[1]
-    ]);
-  }
-  return pts;
-}
-function offsetPos(lat,lon,km,deg){
-  const R=6371,b=deg*Math.PI/180,d=km/R;
-  const la=lat*Math.PI/180,lo=lon*Math.PI/180;
-  const la2=Math.asin(Math.sin(la)*Math.cos(d)+Math.cos(la)*Math.sin(d)*Math.cos(b));
-  const lo2=lo+Math.atan2(Math.sin(b)*Math.sin(d)*Math.cos(la),Math.cos(d)-Math.sin(la)*Math.sin(la2));
-  return [la2*180/Math.PI, lo2*180/Math.PI];
-}
 function posOnPath(pts,t){
   let total=0; const segs=[];
   for(let i=1;i<pts.length;i++){
@@ -588,327 +467,165 @@ function posOnPath(pts,t){
   return pts[pts.length-1];
 }
 
+function curvedArc(from,to,n,curve){
+  n=n||50; curve=curve||0.2;
+  const mid=[(from[0]+to[0])/2,(from[1]+to[1])/2];
+  const dx=to[1]-from[1], dy=to[0]-from[0];
+  const ctrl=[mid[0]-curve*dx,mid[1]+curve*dy];
+  const pts=[];
+  for(let i=0;i<=n;i++){
+    const t=i/n;
+    pts.push([(1-t)*(1-t)*from[0]+2*(1-t)*t*ctrl[0]+t*t*to[0],
+               (1-t)*(1-t)*from[1]+2*(1-t)*t*ctrl[1]+t*t*to[1]]);
+  }
+  return pts;
+}
+
+function offsetPos(lat,lon,km,deg){
+  const R=6371,b=deg*Math.PI/180,d=km/R;
+  const la=lat*Math.PI/180,lo=lon*Math.PI/180;
+  const la2=Math.asin(Math.sin(la)*Math.cos(d)+Math.cos(la)*Math.sin(d)*Math.cos(b));
+  const lo2=lo+Math.atan2(Math.sin(b)*Math.sin(d)*Math.cos(la),Math.cos(d)-Math.sin(la)*Math.sin(la2));
+  return [la2*180/Math.PI,lo2*180/Math.PI];
+}
+
 class PathAnimator{
   constructor(map,pts,color,n,speed,size){
-    this.map=map; this.pts=pts; this.running=false; this.speed=speed||0.004;
-    this.line=L.polyline(pts,{color,weight:2,opacity:0.35,dashArray:'6 4'}).addTo(map);
+    this.map=map; this.pts=pts; this.running=false; this.speed=speed||0.003;
+    this.line=L.polyline(pts,{color,weight:2,opacity:0.4,dashArray:'5 5'}).addTo(map);
     this.particles=[];
-    for(let i=0;i<(n||5);i++){
-      const t0=i/(n||5);
-      const sz=size||8;
-      const icon=L.divIcon({html:`<div style="width:${sz}px;height:${sz}px;border-radius:50%;
-        background:${color};box-shadow:0 0 8px 3px ${color};"></div>`,
+    for(let i=0;i<(n||3);i++){
+      const t0=i/(n||3), sz=size||7;
+      const icon=L.divIcon({
+        html:`<div style="width:${sz}px;height:${sz}px;border-radius:50%;background:${color};box-shadow:0 0 6px 2px ${color};"></div>`,
         className:'',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]});
-      this.particles.push({m:L.marker(posOnPath(pts,t0),{icon,zIndexOffset:1000}).addTo(map),t:t0});
+      this.particles.push({m:L.marker(posOnPath(pts,t0),{icon,zIndexOffset:800}).addTo(map),t:t0});
     }
   }
   start(){
     this.running=true;
     const tick=()=>{
       if(!this.running)return;
-      this.particles.forEach(p=>{p.t=(p.t+this.speed)%1; p.m.setLatLng(posOnPath(this.pts,p.t));});
+      this.particles.forEach(p=>{p.t=(p.t+this.speed)%1;p.m.setLatLng(posOnPath(this.pts,p.t));});
       this._raf=requestAnimationFrame(tick);
     };
     this._raf=requestAnimationFrame(tick);
   }
-  stop(){this.running=false; cancelAnimationFrame(this._raf);}
-  remove(){this.stop(); this.particles.forEach(p=>p.m.remove()); this.line.remove();}
+  stop(){this.running=false;cancelAnimationFrame(this._raf);}
+  remove(){this.stop();this.particles.forEach(p=>p.m.remove());this.line.remove();}
 }
 
-function ovMarker(latlng,html,color){
-  const icon=L.divIcon({html:`<div style="background:${color};color:#fff;padding:4px 8px;
-    border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;
-    box-shadow:0 2px 8px rgba(0,0,0,.6);">${html}</div>`,className:'',iconAnchor:[0,12]});
-  return L.marker(latlng,{icon,zIndexOffset:2000}).addTo(ovMap);
-}
-function ovPulse(latlng,color){
-  const icon=L.divIcon({html:`<div style="width:24px;height:24px;border-radius:50%;
-    border:3px solid ${color};box-shadow:0 0 12px ${color};
-    animation:pulseGlow 1.2s ease-in-out infinite;"></div>`,
-    className:'',iconSize:[24,24],iconAnchor:[12,12]});
-  return L.marker(latlng,{icon,zIndexOffset:3000}).addTo(ovMap);
-}
-
-function openSimOverlay(){
-  const el=document.getElementById('sim-overlay');
-  el.style.display='flex';
-  if(!ovMap){
-    ovMap=L.map('ov-map',{center:[36.5,127.5],zoom:9,zoomControl:true});
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-      {attribution:'© CARTO',subdomains:'abcd',maxZoom:19}).addTo(ovMap);
-  }
-  const sel=document.getElementById('ov-region-sel');
-  if(sel&&sel.options.length===0){
-    REGIONS.forEach(r=>{
-      const o=document.createElement('option');
-      o.value=r.rank; o.textContent=`${r.rank}위 ${r.sido} ${r.sigungu}`;
-      sel.appendChild(o);
-    });
-  }
-  const mainSel=document.getElementById('sim-region-sel');
-  if(mainSel&&sel) sel.value=mainSel.value;
-  ovRegion=REGIONS.find(r=>r.rank===parseInt(sel?.value||'1'))||REGIONS[0];
-  ['power','water','traffic'].forEach(s=>{
-    const b=document.getElementById('ov-btn-'+s);
-    if(b)b.className='sc-btn'+(s===ovScenario?' sc-active':'');
-  });
-  renderOvCluster(); renderOvInfraList();
-  setTimeout(()=>ovMap.invalidateSize(),200);
-}
-function closeSimOverlay(){
-  resetOvSim();
-  document.getElementById('sim-overlay').style.display='none';
-}
-function renderOvCluster(){
-  if(!ovMap||!ovRegion.cluster_geom)return;
-  if(ovMap._cl)ovMap._cl.remove();
-  const c=ovScenario==='power'?'#FFD700':ovScenario==='water'?'#3BC4F2':'#39D353';
-  ovMap._cl=L.geoJSON({type:'Feature',geometry:ovRegion.cluster_geom},{
-    style:{color:c,weight:2,fillColor:c,fillOpacity:0.25}}).addTo(ovMap);
-  ovMap.fitBounds(ovMap._cl.getBounds(),{padding:[80,80]});
-}
-function renderOvInfraList(){
-  const r=ovRegion; let html='';
-  if(ovScenario==='power'){
-    html='<div style="font-weight:700;margin-bottom:5px;">인근 154kV+ 변전소</div>';
-    r.substations.forEach((s,i)=>{
-      const c=i===0?'#FFD700':'#FFA500';
-      html+=`<div class="sub-row"><div class="sub-dot" style="background:${c};box-shadow:0 0 4px ${c};"></div>
-        <div style="flex:1;min-width:0">
-          <div style="color:var(--txt);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.name}</div>
-          <div style="color:var(--txt2);">${s.dist_km}km · ${s.voltage_kv}kV · ~${s.est_cap_mw}MW</div>
-        </div></div>`;
-    });
-  } else if(ovScenario==='water'){
-    html=`<div style="font-weight:700;margin-bottom:5px;">수계 정보</div>
-    <div class="sub-row"><div class="sub-dot" style="background:#3BC4F2;box-shadow:0 0 4px #3BC4F2;"></div>
-    <div><div style="color:var(--txt);font-weight:600;">인근 수계</div>
-    <div style="color:var(--txt2);">${r.water_dist_km}km · 등급: ${r.water_grade}</div></div></div>`;
-  } else {
-    html=`<div style="font-weight:700;margin-bottom:5px;">교통 인프라</div>
-    <div class="sub-row"><div class="sub-dot" style="background:#39D353;box-shadow:0 0 4px #39D353;"></div>
-    <div><div style="color:var(--txt);font-weight:600;">주요 도로</div>
-    <div style="color:var(--txt2);">${r.road_dist_km}km · 스코어 ${r.scores.s_transport}/100</div></div></div>`;
-  }
-  const el=document.getElementById('ov-infra-list');
-  if(el)el.innerHTML=html;
-}
-function setOvScenario(sc){
-  ovScenario=sc; simScenario=sc;
-  ['power','water','traffic'].forEach(s=>{
-    document.getElementById('ov-btn-'+s)?.classList.toggle('sc-active',s===sc);
-    document.getElementById('sc-btn-'+s)?.classList.toggle('sc-active',s===sc);
-    if(s!==sc){
-      document.getElementById('ov-btn-'+s)?.classList.remove('sc-active');
-      document.getElementById('sc-btn-'+s)?.classList.remove('sc-active');
+function runAllSim(){
+  REGIONS.filter(r=>r.rank<=currentTopN).forEach(r=>{
+    const dc=[r.best_lat,r.best_lon];
+    if(activeLayer.power){
+      r.substations.slice(0,2).forEach((s,i)=>{
+        const pa=new PathAnimator(map,curvedArc([s.lat,s.lon],dc,50,0.15),'#FFD700',i===0?4:2,0.005-i*0.001,i===0?9:6);
+        pa.start(); allAnimators.push(pa);
+      });
+    }
+    if(activeLayer.water){
+      const wPos=offsetPos(r.best_lat,r.best_lon,Math.max(r.water_dist_km*1.5,2),300+(r.rank*17)%60);
+      const wp=new PathAnimator(map,curvedArc(wPos,dc,40,0.1),'#3BC4F2',3,0.004,7);
+      wp.start(); allAnimators.push(wp);
+    }
+    if(activeLayer.traffic){
+      const tp=new PathAnimator(map,curvedArc(SEOUL,dc,60,0.25),'#39D353',2,0.002,6);
+      tp.start(); allAnimators.push(tp);
     }
   });
-  renderOvCluster(); renderOvInfraList(); resetOvSim();
 }
-function onOvRegionChange(){
-  const sel=document.getElementById('ov-region-sel');
-  ovRegion=REGIONS.find(r=>r.rank===parseInt(sel.value))||REGIONS[0];
-  renderOvCluster(); renderOvInfraList(); resetOvSim();
+
+function stopAllSim(){
+  allAnimators.forEach(a=>{if(a&&a.remove)a.remove();}); allAnimators=[];
 }
-function resetOvSim(){
-  ovRunning=false;
-  const btn=document.getElementById('ov-run-btn');
-  if(btn){btn.textContent='▶ 시뮬레이션 실행';btn.style.background='var(--ac)';}
-  ovAnimators.forEach(a=>{if(a&&a.remove)a.remove();});
-  ovAnimators=[];
-  if(ovMap){
-    ovMap.eachLayer(l=>{
-      if(l!==ovMap._cl&&!(l instanceof L.TileLayer))try{l.remove();}catch(e){}
-    });
-    renderOvCluster();
-  }
-  const rp=document.getElementById('ov-result');
-  if(rp)rp.innerHTML='';
-}
-function addOvTL(html,delay){
-  setTimeout(()=>{
-    const rp=document.getElementById('ov-result');
-    if(!rp)return;
-    const d=document.createElement('div');
-    d.className='tl2-item'; d.style.animationDelay='0s';
-    d.innerHTML=html; rp.appendChild(d); rp.scrollTop=rp.scrollHeight;
-  },delay);
-}
-function toggleOvSim(){
-  const btn=document.getElementById('ov-run-btn');
-  if(ovRunning){resetOvSim();}
-  else{
-    ovRunning=true;
-    if(btn){btn.textContent='⏹ 중지';btn.style.background='#c0392b';}
-    runOvSim();
+
+function toggleAllSim(){
+  const btn=document.getElementById('run-all-btn');
+  if(allSimRunning){
+    stopAllSim(); allSimRunning=false;
+    btn.textContent='▶ Top5 전체 인프라 시뮬레이션';
+    btn.classList.remove('stop');
+  } else {
+    allSimRunning=true;
+    btn.textContent='⏹ 애니메이션 중지';
+    btn.classList.add('stop');
+    runAllSim();
   }
 }
 
-const SEOUL=[37.5665,126.9780];
-function runOvSim(){
-  const r=ovRegion,dc=[r.best_lat,r.best_lon];
-  document.getElementById('ov-result').innerHTML='';
-  if(ovScenario==='power')runOvPower(r,dc);
-  else if(ovScenario==='water')runOvWater(r,dc);
-  else runOvTraffic(r,dc);
-}
-function runOvPower(r,dc){
-  const pulse=ovPulse(dc,'#FF4444'); ovAnimators.push({remove:()=>pulse.remove()});
-  addOvTL(`<div style="color:#FF4444;font-weight:700">⚡ T+0s 수요 급증 감지</div>
-    <div style="color:var(--txt2);font-size:10px;">UPS 자동 전환</div>`,0);
-  setTimeout(()=>{
-    const sa=curvedArc(SEOUL,dc,80,0.3);
-    const sl=L.polyline(sa,{color:'#aaaaff',weight:1.5,opacity:0.4,dashArray:'4 6'}).addTo(ovMap);
-    ovAnimators.push({remove:()=>sl.remove()});
-    const sm=ovMarker(SEOUL,'🏙 서울 수요지','#7B68EE'); ovAnimators.push({remove:()=>sm.remove()});
-    const pa=new PathAnimator(ovMap,sa,'#9B8CFF',4,0.003,6); pa.start(); ovAnimators.push(pa);
-    addOvTL(`<div style="color:#9B8CFF;font-weight:700">📡 T+1s 서울 수요 연결</div>`,0);
-  },1000);
-  r.substations.slice(0,4).forEach((s,i)=>{
-    setTimeout(()=>{
-      const arc=curvedArc([s.lat,s.lon],dc,60,0.15);
-      const sm=ovMarker([s.lat,s.lon],`⚡ ${s.name}`,i===0?'#FFD700':'#FFA500');
-      ovAnimators.push({remove:()=>sm.remove()});
-      const col=i===0?'#FFD700':'#FFA500';
-      const pa=new PathAnimator(ovMap,arc,col,i===0?6:4,0.006-i*0.001,i===0?10:8);
-      pa.start(); ovAnimators.push(pa);
-      addOvTL(`<div style="color:${col};font-weight:700">🔌 T+${s.response_min}분 ${s.name}</div>
-        <div style="color:var(--txt2);font-size:10px;">${s.dist_km}km · +${s.est_cap_mw}MW</div>`,200);
-    },2000+i*800);
-  });
-  setTimeout(()=>{
-    const ok=r.total_avail_mw>=100;
-    addOvTL(`<div style="color:${ok?'#39D353':'#FF4444'};font-weight:700">
-      ${ok?'✅':'🚨'} 총 ${r.total_avail_mw}MW — ${ok?'공급 균형':'부하 분산 필요'}</div>`,0);
-    pulse.remove();
-    const p2=ovPulse(dc,ok?'#39D353':'#FF4444'); ovAnimators.push({remove:()=>p2.remove()});
-  },2000+r.substations.slice(0,4).length*800+1000);
-}
-function runOvWater(r,dc){
-  const waterPos=offsetPos(dc[0],dc[1],Math.max(r.water_dist_km,0.3),315);
-  addOvTL(`<div style="color:#3BC4F2;font-weight:700">💧 T+0 냉각수 수요 계산</div>
-    <div style="color:var(--txt2);font-size:10px;">수계 ${r.water_dist_km}km · 등급 ${r.water_grade}</div>`,0);
-  setTimeout(()=>{
-    const sa=new PathAnimator(ovMap,curvedArc(SEOUL,dc,80,0.28),'#9B8CFF',3,0.003,5);
-    sa.start(); ovAnimators.push(sa);
-    const sm=ovMarker(SEOUL,'🏙 서울 열부하','#7B68EE'); ovAnimators.push({remove:()=>sm.remove()});
-  },800);
-  setTimeout(()=>{
-    const wm=ovMarker(waterPos,`💧 인근 수계 (${r.water_dist_km}km)`,'#1E90FF');
-    ovAnimators.push({remove:()=>wm.remove()});
-    const pa=new PathAnimator(ovMap,curvedArc(waterPos,dc,60,0.12),'#3BC4F2',6,0.004,9);
-    pa.start(); ovAnimators.push(pa);
-    const pulse=ovPulse(dc,'#3BC4F2'); ovAnimators.push({remove:()=>pulse.remove()});
-    addOvTL(`<div style="color:#3BC4F2;font-weight:700">🌊 취수 펌프 가동</div>
-      <div style="color:var(--txt2);font-size:10px;">${Math.round(100*45*0.7).toLocaleString()}m³/h</div>`,0);
-  },1800);
-  setTimeout(()=>addOvTL(`<div style="color:#39D353;font-weight:700">❄️ 냉각 정상화</div>`,0),3500);
-}
-function runOvTraffic(r,dc){
-  const roadPos=offsetPos(dc[0],dc[1],Math.max(r.road_dist_km,0.2),180);
-  addOvTL(`<div style="color:#39D353;font-weight:700">🚛 T+0 물류 시뮬레이션</div>
-    <div style="color:var(--txt2);font-size:10px;">도로 ${r.road_dist_km}km · 스코어 ${r.scores.s_transport}/100</div>`,0);
-  setTimeout(()=>{
-    const sm=ovMarker(SEOUL,'🏙 서울 출발지','#7B68EE'); ovAnimators.push({remove:()=>sm.remove()});
-    const pa=new PathAnimator(ovMap,curvedArc(SEOUL,dc,80,0.28),'#39D353',5,0.0035,10);
-    pa.start(); ovAnimators.push(pa);
-    addOvTL(`<div style="color:#39D353;font-weight:700">🚛 서울 출발</div>`,0);
-  },500);
-  setTimeout(()=>{
-    const rm=ovMarker(roadPos,`🛣 도로 진입 (${r.road_dist_km}km)`,'#39D353');
-    ovAnimators.push({remove:()=>rm.remove()});
-    const pa2=new PathAnimator(ovMap,curvedArc(roadPos,dc,30,0.05),'#90EE90',3,0.006,7);
-    pa2.start(); ovAnimators.push(pa2);
-    const pulse=ovPulse(dc,'#39D353'); ovAnimators.push({remove:()=>pulse.remove()});
-    addOvTL(`<div style="color:#90EE90;font-weight:700">🏗 접근로 진입</div>`,0);
-  },1800);
-  setTimeout(()=>addOvTL(`<div style="color:#39D353;font-weight:700">✅ 물류 정상화</div>`,0),3500);
+// ── 게이지 ───────────────────────────────────────────────────────────
+function gaugeHtml(label,val,max=100,colorVar='var(--ac)'){
+  const pct=Math.min(100,val/max*100);
+  return `<div class="gauge-wrap">
+    <div class="gauge-lbl"><span style="font-size:11px;color:var(--txt2)">${label}</span>
+      <span style="font-size:11px;font-weight:700;color:${colorVar}">${val}</span></div>
+    <div class="gauge-bar"><div class="gauge-fill" style="width:${pct}%;background:${colorVar}"></div></div>
+  </div>`;
 }
 
-/* compat / sim-tab 버튼 동기화 */
-let simScenario='power';
-function setScenario(sc){
-  simScenario=sc; ovScenario=sc;
-  ['power','water','traffic'].forEach(s=>{
-    const b=document.getElementById('sc-btn-'+s);
-    if(b)b.className='sc-btn'+(s===sc?' sc-active':'');
-  });
-}
-function onSimRegionChange(){
-  const sel=document.getElementById('sim-region-sel');
-  simRegion=REGIONS.find(r=>r.rank===parseInt(sel.value))||REGIONS[0];
-  ovRegion=simRegion;
-}
-function toggleMapSim(){openSimOverlay();}
-function runMapSim(){}
-function resetMapSim(){}
-
-/* 지역 셀렉트 초기화 (sim-tab용) */
-(function(){
-  const sel=document.getElementById('sim-region-sel');
-  if(!sel)return;
-  REGIONS.forEach(r=>{
-    const o=document.createElement('option');
-    o.value=r.rank; o.textContent=`${r.rank}위 ${r.sido} ${r.sigungu} (${r.final_score}점)`;
-    sel.appendChild(o);
-  });
-})();
-
-let overallChart=null;
-function updateOverall(){
-  const r=simRegion;
-  const p=Math.min(100,r.scores.s_power);
-  const w=Math.min(100,r.scores.s_water);
-  const t=Math.min(100,r.scores.s_transport);
-  const ind=Math.min(100,r.scores.s_industry);
-  const overall=Math.round((p*.25+w*.3+t*.25+ind*.2));
-
-  const ctx=document.getElementById('overall-chart').getContext('2d');
-  if(overallChart) overallChart.destroy();
-  overallChart=new Chart(ctx,{type:'doughnut',
-    data:{labels:['전력','냉각수','교통','산업단지'],
-      datasets:[{data:[p,w,t,ind],
-        backgroundColor:['rgba(88,166,255,.7)','rgba(57,211,83,.7)',
-          'rgba(188,140,255,.7)','rgba(210,153,34,.7)'],
-        borderColor:'#0D1117',borderWidth:2}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'60%',
-      plugins:{legend:{position:'right',labels:{color:'#8B949E',font:{size:10},
-        boxWidth:10,padding:8}}}}});
-
-  const rows=[
-    {item:'전력 접근성',score:p,weight:'25%',color:'var(--ac)'},
-    {item:'냉각수 접근성',score:w,weight:'30%',color:'var(--cy)'},
-    {item:'교통 접근성',score:t,weight:'25%',color:'var(--pu)'},
-    {item:'산업단지 근접',score:ind,weight:'20%',color:'var(--or)'},
-  ];
-  const grade=overall>=80?['A','var(--gr)','운영 최적']:
-    overall>=65?['B','var(--ac)','운영 양호']:
-    overall>=50?['C','var(--or)','보완 후 운영']:['D','var(--rd)','추가 투자 필요'];
-
-  document.getElementById('overall-table').innerHTML=
-    `<div style="font-size:11px;color:var(--txt2);margin-bottom:8px;">실데이터 기반 종합 운영 가능성</div>
-    ${rows.map(row=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-      <div style="width:80px;font-size:11px;color:var(--txt2)">${row.item}</div>
-      <div style="flex:1;height:6px;background:var(--bg3);border-radius:3px;">
-        <div style="height:100%;width:${row.score}%;background:${row.color};border-radius:3px;transition:width .6s"></div>
-      </div>
-      <div style="width:30px;font-size:11px;font-weight:700;color:${row.color}">${row.score}</div>
-      <div style="width:28px;font-size:10px;color:var(--txt2)">${row.weight}</div>
-    </div>`).join('')}
-    <div style="margin-top:14px;padding:12px;background:var(--bg3);border-radius:8px;
-         display:flex;align-items:center;gap:14px;">
-      <div style="font-size:36px;font-weight:900;color:${grade[1]}">${grade[0]}</div>
-      <div>
-        <div style="font-size:14px;font-weight:700;color:${grade[1]}">${grade[2]}</div>
-        <div style="font-size:11px;color:var(--txt2);margin-top:2px">
-          종합점수 ${overall}/100 · ${r.sido} ${r.sigungu}</div>
-      </div>
-    </div>`;
+// ── 레이더 ───────────────────────────────────────────────────────────
+let radarChart=null;
+function updateRadar(r){
+  const ctx=document.getElementById('radar-cv').getContext('2d');
+  if(radarChart)radarChart.destroy();
+  radarChart=new Chart(ctx,{type:'radar',data:{
+    labels:['전력','교통','경사도','냉각수','민원회피'],
+    datasets:[{data:[r.scores.s_power,r.scores.s_transport,r.scores.s_slope||0,r.scores.s_water,r.scores.s_complaint||0],
+      backgroundColor:'rgba(88,166,255,.15)',borderColor:'#58A6FF',
+      borderWidth:2,pointBackgroundColor:'#58A6FF',pointRadius:3}]
+  },options:{responsive:true,maintainAspectRatio:false,
+    scales:{r:{min:0,max:100,ticks:{display:false},
+      grid:{color:'rgba(255,255,255,.08)'},angleLines:{color:'rgba(255,255,255,.08)'},
+      pointLabels:{color:'#8B949E',font:{size:10}}}},
+    plugins:{legend:{display:false}}}});
 }
 
-// ── 초기화 ──────────────────────────────────────────────────────────────────
-onSimRegionChange();
-setTimeout(()=>selectRegion(REGIONS[0]), 400);
+// ── 지역 선택 ────────────────────────────────────────────────────────
+let selRank=null;
+function selectRegion(r){
+  if(selRank!==null)document.getElementById('ri-'+selRank)?.classList.remove('sel');
+  selRank=r.rank;
+  document.getElementById('ri-'+r.rank)?.classList.add('sel');
+  map.setView([r.best_lat,r.best_lon],11);
+  const dp=document.getElementById('dp'); dp.style.display='block';
+  document.getElementById('dp-rank').textContent=`${r.rank}위`;
+  document.getElementById('dp-title').textContent=`${r.sido} ${r.sigungu}`;
+  document.getElementById('dp-fs').textContent=r.soft_score??r.final_score;
+  document.getElementById('dp-ms').textContent=(r.macro_rank??'-')+'위';
+  document.getElementById('dp-cs').textContent=r.top_cluster_score.toFixed(1);
+  document.getElementById('dp-ha').textContent=`${r.n_grids.toLocaleString()}격자 (${r.pass_pct??'-'}%)${r.rank<=5?' ·4격자=25ha':''}` ;
+  document.getElementById('dp-mw').textContent=`${r.total_avail_mw}MW`;
+  document.getElementById('dp-sub-d').textContent=`${r.substations[0].dist_km}km`;
+  document.getElementById('dp-wat-d').textContent=`${r.water_dist_km}km (${r.water_grade})`;
+  document.getElementById('dp-gauges').innerHTML=
+    gaugeHtml('전력 접근성',r.scores.s_power,100,'var(--ac)')+
+    gaugeHtml('교통 접근성',r.scores.s_transport,100,'var(--or)')+
+    gaugeHtml('냉각수 접근성',r.scores.s_water,100,'var(--cy)')+
+    gaugeHtml('민원회피',r.scores.s_complaint||0,100,'var(--pu)');
+  updateRadar(r);
+  document.getElementById('ri-'+r.rank)?.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function closeDP(){
+  document.getElementById('dp').style.display='none';
+  map.setView([36.5,127.8],7);
+  if(selRank!==null){document.getElementById('ri-'+selRank)?.classList.remove('sel');selRank=null;}
+}
+
+function switchMain(name){
+  document.querySelectorAll('.tbtab').forEach((t,i)=>t.classList.toggle('on',['map','method'][i]===name));
+  document.querySelectorAll('.tab-view').forEach((v,i)=>v.classList.toggle('on',['view-map','view-method'][i]===v.id));
+}
+function sbTab(idx){
+  document.querySelectorAll('.sb-tab').forEach((t,i)=>t.classList.toggle('on',i===idx));
+  document.getElementById('sb-ranking').style.display=idx===0?'block':'none';
+  document.getElementById('sb-method').style.display=idx===1?'block':'none';
+}
+
+// ── 초기 렌더 ────────────────────────────────────────────────────────
+renderAll(currentTopN);
+setTimeout(()=>selectRegion(REGIONS[0]),400);
 </script>
 </body>
 </html>
